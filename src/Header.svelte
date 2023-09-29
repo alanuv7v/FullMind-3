@@ -1,6 +1,6 @@
 <script>
 </script>
-<div style="color: red; font-size: 28px; background-color: yellow;">
+<div style="color: white; font-size: 22px; background-color: black;">
   커밋 안하면 다 날라가!!!!!!
 </div>
 <main>
