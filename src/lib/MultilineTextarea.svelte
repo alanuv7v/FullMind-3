@@ -3,7 +3,7 @@
 <script>
   import {createEventDispatcher, onMount} from 'svelte'
   
-  export let inputTextarea;
+  let inputTextarea;
   let visibleTextarea;
   export let placeholder;
   export let color;
@@ -70,7 +70,8 @@
     id="visibleTextarea" spellcheck="false" rows="1"></textarea>
 </div>
 
-<style>
+<style lang="stylus">
+  @import "../themes/Space/MultilineTextarea"
   * {
     box-sizing: border-box; /* 중요 */
   }

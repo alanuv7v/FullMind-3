@@ -1,8 +1,19 @@
 <script>
     import Node from "./Node.svelte";
-  let tile = [10, 10]
+  let tile = [100, 100]
 
 </script>
-aaa
 
-<Node {tile}/>
+<main>
+  <Node {tile}/>
+</main>
+
+<style lang="stylus">
+  main {
+    width: 100%
+    height: 100%
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+</style>
