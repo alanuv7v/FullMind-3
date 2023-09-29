@@ -15,27 +15,5 @@
 
 
 <style>
-  /* @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200&display=swap');
-  @import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Noto+Serif+KR:wght@200&display=swap');
-  @import url(//fonts.googleapis.com/earlyaccess/jejumyeongjo.css); */
-  * {
-    /* font-family: 'Jeju Myeongjo', serif; */
-    font-size: 16px;
-    /* letter-spacing: 2px; */
-  }
-  main {
-    position: relative;
-  }
-  #tools {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: fit-content;  
-  }
-  #title {
-    /* position: absolute;
-    top: 0px;*/ 
-    width: 100%;
-    background-color: rgba(225, 225, 225, 1);
-  }
+  @import "/themes/Space/Header"
 </style>
