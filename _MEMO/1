@@ -1,0 +1,22 @@
+으앙
+
+codesandbox vscode extension 깔기
+
+codesandbox는 깃이랑 관계없이 따로 저장되는 공간이 있네. 좋다.
+webcontainer 대신 서버 컨테이너? 의 장점인가?
+
+stackblitz vs codeflow vs vscode vs codesandbox
+
+vscode랑 codesandbox를 같이쓰자.
+
+그러나 vscode만 쓰는건 정말 불가능한가.
+
+! 그냥 run dev build만 돌린 다음에, html 파일만 열던가.
+그러다 정 서버-클라이언트 시뮬레이션하고 싶으면, codesandbox나 stackblitz에서 깃 저장소 열면 되잖아.
+근데 github 연동이 이상하게 안되는게 문제.
+그러나 사지방 컴퓨터 자체에 vscode를 깐다면?
+가능할지도!
+
+
+잠만 근데 wordwrap이 안되는데?
+? ...

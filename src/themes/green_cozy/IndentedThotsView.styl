@@ -1,0 +1,20 @@
+@import "global_variables"
+
+* {
+  box-sizing: border-box;
+}
+main {
+  overflow: auto;
+}
+:global(.focused) {
+  /* outline: 4px solid blue; */
+  border-color: rgba(0, 20, 255, 0.4) !important;
+  background-color: rgba(132, 176, 160, 0.38) !important;
+}
+:global(.ghost) {
+  transition: none !important;
+  height: 0px !important;
+  overflow: hidden !important;
+  /* outline: 4px solid skyblue; */
+  border-color: skyblue !important;
+}

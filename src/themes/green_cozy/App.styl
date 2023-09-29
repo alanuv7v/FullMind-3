@@ -1,0 +1,73 @@
+  @import "global_variables"
+    
+  :global(button) {
+    border: 0px solid transparent;
+    box-shadow: inset 1px 1px 2px 0px rgba(0,0,0,0.5);
+  }
+  #App {
+    position: relative;
+    height: fit-content;
+  }
+  #content > * {
+    border: 8px inset lightgray;
+    height: 100%;
+    padding: 10px;
+    overflow: inherit;
+  }
+  #background {
+    position: fixed;
+    top: 0px;
+    width: 100vw;
+    height: 100vh;
+    background-color: light_green;
+    z-index: -1;
+    transition: none;
+  }
+  #keyboard_toolbar {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background-color: gainsboro;
+    width: 100vw;
+    height: 30px;
+    display: flex;
+    flex-direction: row;
+    z-index: 4;
+  }
+  #command_palette {
+    display: none;
+
+    position: fixed;
+    margin-top: 160px;
+    background-color: rgba(54, 54, 54, 1);
+
+    width: 75vw;
+    height: fit-content;
+    left: ((100-@width)/2);
+    z-index: 4;
+
+    textarea {
+        width: 100%;
+        height: fit-content;
+        color: white;
+        border: 1px solid transparent;
+        background-color: transparent;
+        resize: none;
+        box-sizing: border-box;
+        font-size: 16px !important;
+        padding: 4px;
+    }
+  }
+  
+  /* #noise {
+    filter: contrast(170%);
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    mix-blend-mode: overlay;
+    background:
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='3' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    z-index: 2;
+  } */

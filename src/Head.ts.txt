@@ -1,0 +1,22 @@
+class thot() {
+  content: String //html in plain text
+  parents: int[]
+  children: int[]
+}
+type thot = {
+  content: String
+  parents: Number[]
+  children: Number[]
+}
+function thotID() {
+  return 0;
+}
+
+export const thots: thots = {}
+/*thots: object = {
+  thotID : 
+}*/
+
+class Head {
+  thots =
+}
