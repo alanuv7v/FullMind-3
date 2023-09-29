@@ -59,12 +59,6 @@ let container = {
 
 <main id="App">
   <Fontfetcher />
-  <div id="keyboard_toolbar" bind:this={keyboard_toolbar}>
-    <button>⮝</button>
-    <button on:click={() => {IndentedThotsView_elem.onCtrlShiftArrowKeydown('ArrowDown')}}>⮟</button>
-    <button>⮜</button>
-    <button>⮞</button>
-  </div>
   <div id="command_palette" bind:this={command_palette}>
     <MultilineTextarea
     placeholder={
@@ -77,6 +71,13 @@ let container = {
   <Header />
   <div id="content" class="border">
     <NodeView />
+  </div>
+  <div id="keyboard_toolbar" bind:this={keyboard_toolbar}>
+    <button>⮝</button>
+    <!-- <button on:click={() => {IndentedThotsView_elem.onCtrlShiftArrowKeydown('ArrowDown')}}>⮟</button> -->
+    <button>⮟</button>
+    <button>⮜</button>
+    <button>⮞</button>
   </div>
   <div id='background'></div>
   <!-- <div id='test'>
