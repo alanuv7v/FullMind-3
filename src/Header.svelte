@@ -14,6 +14,6 @@
 </main>
 
 
-<style>
+<style lang="stylus">
   @import "/themes/Space/Header"
 </style>

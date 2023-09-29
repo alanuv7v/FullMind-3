@@ -75,18 +75,18 @@ let container = {
     />
   </div>
   <Header />
-  <div id="content">
+  <div id="content" class="border">
     <NodeView />
   </div>
   <div id='background'></div>
-  <div id='test'>
+  <!-- <div id='test'>
     폰트 테스트
     가나다라마바사 ABCDEFG
     The quick brown fox jumps over the lazy dog
     다람쥐 헌 쳇바퀴에 타고파
     !@#$%^&*
     <div>{hi} / {hi2} / {hi3} / {hi4}</div>
-  </div>
+  </div> -->
   
   <!-- <div id="noise"></div> -->
   
