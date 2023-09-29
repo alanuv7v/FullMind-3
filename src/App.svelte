@@ -15,7 +15,7 @@ https://armadillo-dev.github.io/ui/ux/benefit-and-cost-of-ui-component-framework
 import Fontfetcher from "./Fontfetcher.svelte"
 import Header from "./Header.svelte"
 import IndentedThotsView from "./IndentedThotsView.svelte"
-import PhamphletView from "./views/PhamphletView/PhamphletView.svelte"
+import NodeView from "./views/NodeView/NodeView.svelte"
 import MultilineTextarea from './lib/MultilineTextarea.svelte'
 import {getContext, onMount} from 'svelte'
 
@@ -83,8 +83,7 @@ window.onkeydown = function(e) {
   </div>
   <Header />
   <div id="content">
-    <PhamphletView />
-    <IndentedThotsView bind:this={IndentedThotsView_elem}/>
+    <NodeView />
   </div>
   <div id='background'></div>
   <div id='test'>
