@@ -5,14 +5,14 @@
   
   let inputTextarea;
   let visibleTextarea;
-  
+
   export let placeholder = ""
   export let value = ""
   export let color = "white"
   
 
   function resizeTextarea() {
-    inputTextarea.style.height = "0px"
+    inputTextarea.style.height = "0px" //리셋해서 scrollHeight 다시 계산
     inputTextarea.style.height = (inputTextarea.scrollHeight) + "px"
     visibleTextarea.style.height = inputTextarea.style.height
     visibleTextarea.value = inputTextarea.value //높이 먼저 변한 후 value 변경됨
@@ -51,6 +51,7 @@
 
   onMount(
     ()=>{
+      console.log(placeholder)
       resizeTextarea();
       setValues();
     }
@@ -58,7 +59,7 @@
 
 </script>
 
-<div id="textareas">
+<div id="MultilineTextarea">
   <textarea
     bind:this={inputTextarea}
     on:keydown={(e) => {onTextareaKeydown(e)}}
@@ -79,7 +80,7 @@
   * {
     box-sizing: border-box; /* 중요 */
   }
-  #textareas {
+  #MultilineTextarea {
     position:relative; /* 중요 */
     width: 100%;
     height: fit-content;
@@ -87,15 +88,11 @@
   }
   textarea {
     background-color: transparent;
-
     font-size: inherit;
-    
     width: 100%;
-    
-    padding: 4px;
+    padding: 1em;
     overflow-y: hidden;
     resize: none;
-    
   }
   #visibleTextarea {
     color: black;

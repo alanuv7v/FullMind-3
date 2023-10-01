@@ -56,7 +56,7 @@
       {#if p[1].type === "Int"}
         <input type="number" placeholder={p[0]} min="1" max="100">
         {:else}
-        <MultilineTextarea placeholder={p[0]} value={p[1]} color="white"/>
+        <MultilineTextarea placeholder={p[0]} value={""} color="white"/>
       {/if}
     {/if}
     </div>
