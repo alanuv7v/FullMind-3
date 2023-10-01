@@ -2,7 +2,6 @@
   import {onMount} from "svelte"
   import MultilineTextarea from "../../lib/MultilineTextarea.svelte";
   export let tile, thot
-
   //settings
     let initGrow = true
     let typewritter = false
@@ -66,6 +65,7 @@
 </main>
 
 <style lang="stylus">
+  @import "../../themes/Space/global_variables"
   main {
     padding: 1em;
     overflow: hidden;
@@ -73,8 +73,8 @@
   }
   main {
   }
-  entry {
-    border: 1px solid light;
+  .entry {
+    border: 1px solid gray
   }
   .entry > * {
     width: 100%
