@@ -1,7 +1,7 @@
 export const default_thot = {
   id: 0, //나중엔 uuid 사용해서 id 부여 고려해보자
   props: {
-    heading: "",
+    heading: {type: "String", style: "text-align: center;"},
     content: "",
     age: {type: "Int"},
   },
