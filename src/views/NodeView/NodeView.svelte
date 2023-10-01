@@ -4,15 +4,22 @@
     import {thisHead} from "../../heads/head_1.js"
     import {default_thot, default_container_data} from "../../default.js"
     import Node from "./Node.svelte";
+    import NodeColumn from "./NodeCoulmn.svelte"
 
   let tile = [10, 10]
 
   let thot = default_thot
 
+  let Columns
+
+  let thots = [thot]
+
+
 </script>
 
 <main>
   <Node {tile} {thot}/>
+  <NodeColumn {thots}/>
 </main>
 
 <style lang="stylus">
