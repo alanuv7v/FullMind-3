@@ -1,6 +1,6 @@
 <script>
   import {tile} from "./NodeViewStore"
-  import {onMount} from "svelte"
+  import {onMount, getContext} from "svelte"
   import MultilineTextarea from "../../lib/MultilineTextarea.svelte";
   export let thot
   //settings
@@ -38,9 +38,16 @@
     main.style.minHeight = tile[1] + 'em'
   })
 
-  function onTextareaFocus() {
-    
+  let focusedStyle = "inset 0px 0px 0px 4px white"
+  function focusSelf() {
+    main.style.boxShadow = focusedStyle
   }
+
+  function onTextareaFocus() {
+    let f = getContext('focusNode')
+    f()
+  }
+
   
 
 </script>

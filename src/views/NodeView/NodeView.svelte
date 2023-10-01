@@ -17,6 +17,12 @@
 
   let relations = []
 
+  function focusNode(target) {
+    
+  }
+
+  setContext('focusNode', focusNode)
+
 </script>
 
 <main>
