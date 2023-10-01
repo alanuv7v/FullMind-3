@@ -103,12 +103,11 @@
   }
   #inputTextarea {
     position:absolute;
-    border: 1px solid transparent;
+    border: none;
     color: transparent;
     background-color: transparent;
     z-index: 1;
     /* transition: none !important; */ /* 진짜 중요 */
-    transition: border 0.5s ease;
     caret-color: white;
   }
   #inputTextarea::selection {

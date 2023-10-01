@@ -84,7 +84,8 @@
   main {
   }
   .entry {
-    border: 1px solid gray
+    //border: 1px solid gray
+    box-shadow: inset 0px 0px 0px 1px gray;
   }
   
   .entry > * {
