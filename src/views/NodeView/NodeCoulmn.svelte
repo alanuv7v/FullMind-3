@@ -8,3 +8,9 @@
    <Node {thot}/>
   {/each}
 </main>
+
+<style>
+  main {
+    margin-right: -1px
+  }
+</style>

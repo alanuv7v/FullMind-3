@@ -38,6 +38,9 @@
     main.style.minHeight = tile[1] + 'em'
   })
 
+  function onTextareaFocus() {
+    
+  }
   
 
 </script>
@@ -52,18 +55,18 @@
     <div id='heading'>
       <button id="focus">F</button>
       <div class="entry">
-        <MultilineTextarea placeholder={p[0]} value={""} color="white" textAlign={p[1].textAlign}/>
+        <MultilineTextarea placeholder={p[0]} value={""} color="white" textAlign={p[1].textAlign} on:focus={onTextareaFocus}/>
       </div>
     </div>
     {:else}
       <div class="entry">
       {#if typeof p[1] != "object"}
-        <MultilineTextarea placeholder={p[0]} value={p[1]} color="white"/>
+        <MultilineTextarea placeholder={p[0]} value={p[1]} color="white" on:focus={onTextareaFocus}/>
       {:else}
         {#if p[1].type === "Int"}
           <input type="number" placeholder={p[0]} min="1" max="100">
           {:else}
-          <MultilineTextarea placeholder={p[0]} value={""} color="white" textAlign={p[1].textAlign}/>
+          <MultilineTextarea placeholder={p[0]} value={""} color="white" textAlign={p[1].textAlign} on:focus={onTextareaFocus}/>
         {/if}
       {/if}
       </div>
@@ -80,8 +83,7 @@
     padding: 1em;
     overflow: hidden;
     transition: width 0.5s ease, height 0.5s ease;
-  }
-  main {
+    margin-bottom: -1px
   }
   .entry {
     //border: 1px solid gray

@@ -4,6 +4,7 @@
 </script>
   
 <main class="border">
+  <div>relations</div>
   {#each relations as relation}
     {relation}
   {/each}
@@ -11,7 +12,10 @@
 
 <style>
   main {
-    width: 10em;
-    height: 20em;
+    width: 20em;
+    height: 30em;
+  }
+  main > *:first-child {
+    margin-top: 0.5em
   }
 </style>
