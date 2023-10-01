@@ -2,7 +2,7 @@
 
 
 <script>
-    import {panzoom} from '../../lib/panzoom'
+    import {panzoom} from "../../lib/panzoom"
     
     import {onMount, setContext} from "svelte"
     import { writable, derived } from "svelte/store";
@@ -55,11 +55,12 @@
   setContext('focusNode', focusNode)
 
   onMount(() => {
-    panzoom('#space', {
-      bound:'outer'
-    });
   })
 
+  document.addEventListener("DOMContentLoaded", (e) => {
+    panzoom('#space', {bound:'none'});
+  });
+  
 </script>
 
 <div bind:this={space} id="space">
@@ -75,15 +76,17 @@
 
 <style lang="stylus">
   #space {
-    width: 1000em
-    height: 1000em
+    position: absolute
+    width: 1000px
+    height: 1000px
+    display: flex;
+    justify-content: center;
+    align-items: center
+    overflow: hidden;
   }
   main {
-    width: 100%
-    height: 100%
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    overflow: hidden;
   }
 </style>

@@ -42,12 +42,21 @@
   #content {
     margin: 10px;
     flex-grow: 1
+
+    display: flex;
+    justify-content: center;
+    align-items: center
+
+    overflow: hidden;
+    position: relative
   }
   #content > * {
     border: 8px inset lightgray;
     height: 100%;
     padding: 10px;
     overflow: inherit;
+
+
   }
   #background {
     position: fixed;
