@@ -1,7 +1,7 @@
 <script>
   import {onMount} from "svelte"
   import MultilineTextarea from "../../lib/MultilineTextarea.svelte";
-  export let tile
+  export let tile, thot
 
   //settings
     let initGrow = true
@@ -48,6 +48,12 @@
 <main bind:this={main} class="border">
   Node
   <MultilineTextarea placeholder="why am I floating on this earth alone? I always wondered." color="white"/>
+  {#each thot.props as p}
+    
+  {/each}
+  {#if thot}
+    <MultilineTextarea placeholder= color="white"/>
+  {/if}
 </main>
 
 <style lang="stylus">
