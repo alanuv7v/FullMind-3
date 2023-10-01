@@ -71,11 +71,16 @@
     overflow: hidden;
     transition: width 0.5s ease, height 0.5s ease;
   }
-  .entry {
-    margin-bottom: 1em
+  main {
+  }
+  entry {
+    border: 1px solid light;
   }
   .entry > * {
     width: 100%
+  }
+  .entry:nth-child(n+1):not(:last-child) {
+    margin-bottom: 1em
   }
 
 </style>
