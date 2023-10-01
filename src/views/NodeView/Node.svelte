@@ -41,9 +41,9 @@
 
 </script>
 
-<template lang="pug">
+<!-- <template lang="pug">
   div#pug.pug asdf
-</template>
+</template> -->
 
 <main bind:this={main} class="border">
   Node
@@ -57,10 +57,4 @@
     transition: width 0.5s ease, height 0.5s ease;
   }
 
-  #pug 
-    color skyblue
-  
-  .pug
-    border 1px solid white
-  
 </style>
