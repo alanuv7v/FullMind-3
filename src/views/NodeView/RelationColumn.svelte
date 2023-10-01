@@ -28,8 +28,8 @@
 
 <style lang="stylus">
   main {
+    position: absolute;
     width: 20em;
-    height: 30em;
   }
   main > *:first-child {
     margin-top: 0.5em
@@ -38,7 +38,7 @@
   .relation {
     display: flex
     flex-direction: column
-    padding;
+    padding: 0px 0.5em 0.5em 0.5em
   }
   .relation button {
     width: 100%

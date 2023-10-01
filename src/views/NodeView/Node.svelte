@@ -40,8 +40,8 @@
     if (initGrow) {
       //대충 css 애니메이션. 점에서 가로선이 됬다가 세로로 길어져 열리는.
     }
-    main.style.minWidth = tile[0] + 'em'
-    main.style.minHeight = tile[1] + 'em'
+    /* main.style.minWidth = tile[0] + 'em'
+    main.style.minHeight = tile[1] + 'em' */
   })
 
 
@@ -99,6 +99,7 @@
 <style lang="stylus">
   @import "../../themes/Space/global_variables"
   #main {
+    width: 20em;
     padding: 1em;
     overflow: hidden;
     transition: width 0.5s ease, height 0.5s ease;

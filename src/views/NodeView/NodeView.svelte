@@ -52,7 +52,9 @@
   {#each columnsNo as cN, i}
     <NodeColumn bind:this={Columns[i]} {i} {thots} />
   {/each}
-  <RelationColumn bind:this={relationsColumn} />
+  <div id="page">
+    <RelationColumn bind:this={relationsColumn} />
+  </div>
 </main>
 
 <style lang="stylus">
@@ -62,5 +64,6 @@
     display: flex;
     justify-content: center;
     align-items: flex-start;
+    overflow: hidden;
   }
 </style>
