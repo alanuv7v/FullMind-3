@@ -45,21 +45,27 @@
 </template> -->
 
 <main bind:this={main} class="border">
-  <div class="entry">
-    Node
-  </div>
   {#each Object.entries(thot.props) as p}
-    <div class="entry">
-    {#if typeof p[1] != "object"}
-      <MultilineTextarea placeholder={p[0]} value={p[1]} color="white"/>
-    {:else}
-      {#if p[1].type === "Int"}
-        <input type="number" placeholder={p[0]} min="1" max="100">
-        {:else}
-        <MultilineTextarea placeholder={p[0]} value={""} color="white"/>
-      {/if}
-    {/if}
+    {#if p[0] === "heading"}
+    <div id='heading'>
+      <button id="focus">F</button>
+      <div class="entry">
+        <MultilineTextarea placeholder={p[0]} value={""} color="white" textAlign={p[1].textAlign}/>
+      </div>
     </div>
+    {:else}
+      <div class="entry">
+      {#if typeof p[1] != "object"}
+        <MultilineTextarea placeholder={p[0]} value={p[1]} color="white"/>
+      {:else}
+        {#if p[1].type === "Int"}
+          <input type="number" placeholder={p[0]} min="1" max="100">
+          {:else}
+          <MultilineTextarea placeholder={p[0]} value={""} color="white" textAlign={p[1].textAlign}/>
+        {/if}
+      {/if}
+      </div>
+    {/if}
   {/each}
   <div class="entry">
     <MultilineTextarea placeholder="why am I floating on this earth alone? I always wondered." color="white"/>
@@ -85,6 +91,17 @@
   }
   .entry:nth-child(n+1):not(:last-child) {
     margin-bottom: 1em
+  }
+  #heading {
+    display: flex
+    flex-direction: row
+    align-items: center
+    margin-bottom: 1em
+  }
+  #focus {
+    margin-right: 0.5em
+    width: 2em
+    height: 2em
   }
 
 </style>

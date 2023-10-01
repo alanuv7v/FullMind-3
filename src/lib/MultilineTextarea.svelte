@@ -9,6 +9,7 @@
   export let placeholder = ""
   export let value = ""
   export let color = "white"
+  export let textAlign = "left"
   
 
   function resizeTextarea() {
@@ -51,7 +52,6 @@
 
   onMount(
     ()=>{
-      console.log(placeholder)
       resizeTextarea();
       setValues();
     }
@@ -68,11 +68,13 @@
     on:focus={() => onTextareaFocus()}
     id="inputTextarea" rows="1" spellcheck="false"
     placeholder={placeholder}
-    value={value}></textarea>
+    value={value}
+    style={"text-align:"+textAlign}></textarea>
   <textarea
     bind:this={visibleTextarea}
     on:focus={() => inputTextarea.focus()}
-    id="visibleTextarea" spellcheck="false" rows="1"></textarea>
+    id="visibleTextarea" spellcheck="false" rows="1"
+    style={"text-align:"+textAlign}></textarea>
 </div>
 
 <style lang="stylus">
