@@ -34,12 +34,16 @@
     if (initGrow) {
       //대충 css 애니메이션. 점에서 가로선이 됬다가 세로로 길어져 열리는.
     }
-    main.style.minWidth = tile[0] + 'px'
-    main.style.minHeight = tile[1] + 'px'
+    main.style.minWidth = tile[0] + 'em'
+    main.style.minHeight = tile[1] + 'em'
   })
 
 
 </script>
+
+<template lang="pug">
+  div#pug.pug asdf
+</template>
 
 <main bind:this={main} class="border">
   Node
@@ -48,9 +52,15 @@
 
 <style lang="stylus">
   main {
-    padding: 10px;
+    padding: 1em;
     overflow: hidden;
     transition: width 0.5s ease, height 0.5s ease;
   }
+
+  #pug 
+    color skyblue
+  
+  .pug
+    border 1px solid white
   
 </style>

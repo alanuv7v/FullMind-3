@@ -1,6 +1,6 @@
 <script>
     import Node from "./Node.svelte";
-  let tile = [100, 100]
+  let tile = [10, 10]
 
 </script>
 
