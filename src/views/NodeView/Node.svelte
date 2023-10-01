@@ -1,31 +1,37 @@
+<svelte:options accessors />
+
 <script>
   import {tile} from "./NodeViewStore"
   import {onMount, getContext} from "svelte"
   import MultilineTextarea from "../../lib/MultilineTextarea.svelte";
-  export let thot
+  export let i, ii, thot
+
   //settings
     let initGrow = true
     let typewritter = false
 
   let main
 
-  function typewrite(target, toChange) {
-    if (!toChange) {
-      let toChange = "innerText"
+  let adress = [i, ii]
+
+  //styling
+    function typewrite(target, toChange) {
+      if (!toChange) {
+        let toChange = "innerText"
+      }
+      let original = target[toChange]
+      target[toChange] = ""
+      let i = 0
+      var Interval = setInterval(
+        function() {
+          target[toChange] += original[i]
+          i++
+          if (i >= original.length) {
+            clearInterval(Interval)
+          }
+        }, 100
+      )
     }
-    let original = target[toChange]
-    target[toChange] = ""
-    let i = 0
-    var Interval = setInterval(
-      function() {
-        target[toChange] += original[i]
-        i++
-        if (i >= original.length) {
-          clearInterval(Interval)
-        }
-      }, 100
-    )
-  }
   
   onMount(() => {
     if (typewritter) {
@@ -38,15 +44,21 @@
     main.style.minHeight = tile[1] + 'em'
   })
 
-  let focusedStyle = "inset 0px 0px 0px 4px white"
-  function focusSelf() {
-    main.style.boxShadow = focusedStyle
-  }
 
-  function onTextareaFocus() {
-    let f = getContext('focusNode')
-    f()
-  }
+  //focusing
+    let focusNode = getContext('focusNode')
+
+    let focusedStyle = "inset 0px 0px 0px 4px white"
+    export function focusSelf() {
+      main.style.boxShadow = focusedStyle
+    }
+    export function unfocusSelf() {
+      main.style.boxShadow = null
+    }
+
+    function onTextareaFocus() {
+      focusNode(adress)
+    }
 
   
 
@@ -56,7 +68,7 @@
   div#pug.pug asdf
 </template> -->
 
-<main bind:this={main} class="border">
+<div id="main" bind:this={main} class="border">
   {#each Object.entries(thot.props) as p}
     {#if p[0] === "heading"}
     <div id='heading'>
@@ -82,11 +94,11 @@
   <div class="entry">
     <MultilineTextarea placeholder="why am I floating on this earth alone? I always wondered." color="white"/>
   </div>
-</main>
+</div>
 
 <style lang="stylus">
   @import "../../themes/Space/global_variables"
-  main {
+  #main {
     padding: 1em;
     overflow: hidden;
     transition: width 0.5s ease, height 0.5s ease;

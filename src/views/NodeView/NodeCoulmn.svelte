@@ -1,11 +1,18 @@
+<svelte:options accessors />
+
 <script>
   import Node from "./Node.svelte";
-  export let thots
+  export let i, thots
+
+  export let Nodes = []
+
+  let self
+
 </script>
 
 <main>
-  {#each thots as thot}
-   <Node {thot}/>
+  {#each thots as thot, ii}
+   <Node bind:this={Nodes[ii]} {i} {ii} {thot}/>
   {/each}
 </main>
 

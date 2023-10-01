@@ -1,21 +1,47 @@
+<svelte:options accessors />
+
 <script>
   import Node from "./Node.svelte";
-  export let relations
+  import { writable } from "svelte/store";
+  
+  export let relations = writable([])
+  
+  let main
+
+  $: if ($relations.length > 0) {
+    main.style.height = "fit-content"
+  }
+
 </script>
   
-<main class="border">
+<main bind:this={main} class="border">
   <div>relations</div>
-  {#each relations as relation}
-    {relation}
-  {/each}
+  {#if relations}
+    {#each $relations as relation}
+      <div class="relation">
+        <button>{Object.keys(relation)[0]}</button>
+        <button>{Object.keys(relation)[1]}</button>
+      </div>
+    {/each}
+  {/if}
 </main>
 
-<style>
+<style lang="stylus">
   main {
     width: 20em;
     height: 30em;
   }
   main > *:first-child {
     margin-top: 0.5em
+    margin-bottom: 0.5em
+  }
+  .relation {
+    display: flex
+    flex-direction: column
+    padding;
+  }
+  .relation button {
+    width: 100%
+    padding: 0.5em;
   }
 </style>
