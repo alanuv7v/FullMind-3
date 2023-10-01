@@ -1,7 +1,8 @@
 <script>
+  import {tile} from "./NodeViewStore"
   import {onMount} from "svelte"
   import MultilineTextarea from "../../lib/MultilineTextarea.svelte";
-  export let tile, thot
+  export let thot
   //settings
     let initGrow = true
     let typewritter = false
@@ -37,6 +38,7 @@
     main.style.minHeight = tile[1] + 'em'
   })
 
+  
 
 </script>
 

@@ -1,0 +1,1 @@
+export let tile = [10, 10]

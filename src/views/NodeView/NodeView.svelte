@@ -5,6 +5,7 @@
     import {default_thot, default_container_data} from "../../default.js"
     import Node from "./Node.svelte";
     import NodeColumn from "./NodeCoulmn.svelte"
+    import RelationColumn from "./RelationColumn.svelte"
 
   let tile = [10, 10]
 
@@ -12,14 +13,16 @@
 
   let Columns
 
-  let thots = [thot]
+  let thots = [thot, thot]
 
+  let relations = []
 
 </script>
 
 <main>
-  <Node {tile} {thot}/>
+  <Node {thot}/>
   <NodeColumn {thots}/>
+  <RelationColumn {relations} />
 </main>
 
 <style lang="stylus">
@@ -28,6 +31,6 @@
     height: 100%
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
   }
 </style>
