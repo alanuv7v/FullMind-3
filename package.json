@@ -17,6 +17,7 @@
     "vite": "^4.4.5"
   },
   "dependencies": {
+    "@panzoom/panzoom": "^4.5.1",
     "animejs": "^3.2.1",
     "konva": "^9.2.1",
     "svelte-portal": "^2.2.0",

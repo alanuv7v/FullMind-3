@@ -1,10 +1,14 @@
 <svelte:options accessors />
 
+
 <script>
+    import {panzoom} from '../../lib/panzoom'
+    
     import {onMount, setContext} from "svelte"
     import { writable, derived } from "svelte/store";
     import {thisHead} from "../../heads/head_1.js"
     import {default_thot, default_container_data} from "../../default.js"
+
     import Node from "./Node.svelte";
     import NodeColumn from "./NodeCoulmn.svelte"
     import RelationColumn from "./RelationColumn.svelte"
@@ -18,8 +22,12 @@
   let Columns = []
   let relationsColumn
 
+  let space
+
   //states
   let focusedNode = null
+
+
 
   function getNodeByAdress(adress) {
     return Columns[adress[0]].Nodes[adress[1]]
@@ -46,18 +54,30 @@
 
   setContext('focusNode', focusNode)
 
+  onMount(() => {
+    panzoom('#space', {
+      bound:'outer'
+    });
+  })
+
 </script>
 
-<main>
-  {#each columnsNo as cN, i}
+<div bind:this={space} id="space">
+  <main>
+    {#each columnsNo as cN, i}
     <NodeColumn bind:this={Columns[i]} {i} {thots} />
-  {/each}
-  <div id="page">
-    <RelationColumn bind:this={relationsColumn} />
-  </div>
-</main>
+    {/each}
+    <div id="page">
+      <RelationColumn bind:this={relationsColumn} />
+    </div>
+  </main>
+</div>
 
 <style lang="stylus">
+  #space {
+    width: 1000em
+    height: 1000em
+  }
   main {
     width: 100%
     height: 100%
