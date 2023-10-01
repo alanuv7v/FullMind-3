@@ -65,5 +65,9 @@
     overflow: hidden;
     transition: width 0.5s ease, height 0.5s ease;
   }
+  main > * {
+    width: 100%
+    margin-bottom: 1em
+  }
 
 </style>
