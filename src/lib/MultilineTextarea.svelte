@@ -5,8 +5,11 @@
   
   let inputTextarea;
   let visibleTextarea;
-  export let placeholder;
-  export let color;
+  
+  export let placeholder = ""
+  export let value = ""
+  export let color = "white"
+  
 
   function resizeTextarea() {
     inputTextarea.style.height = "0px"
@@ -63,7 +66,8 @@
     on:input={() => onTextareaChange()}
     on:focus={() => onTextareaFocus()}
     id="inputTextarea" rows="1" spellcheck="false"
-    placeholder={placeholder}></textarea>
+    placeholder={placeholder}
+    value={value}></textarea>
   <textarea
     bind:this={visibleTextarea}
     on:focus={() => inputTextarea.focus()}

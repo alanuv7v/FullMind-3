@@ -1,15 +1,15 @@
 export const default_thot = {
   id: 0, //나중엔 uuid 사용해서 id 부여 고려해보자
   props: {
-    heading: "Heading",
-    content: "Content",
+    heading: "",
+    content: "",
+    age: {type: "Int"},
   },
   relations: [
     {parents: [],
       children: []},
     {conclusions: [],
-      reasons: []
-    },
+      reasons: []},
     {poem: [],
       actuality: []}
   ],
