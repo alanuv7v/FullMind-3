@@ -48,9 +48,6 @@
   <div class="entry">
     Node
   </div>
-  <div class="entry">
-    <MultilineTextarea placeholder="why am I floating on this earth alone? I always wondered." color="white"/>
-  </div>
   {#each Object.entries(thot.props) as p}
     <div class="entry">
     {#if typeof p[1] != "object"}
@@ -62,6 +59,9 @@
     {/if}
     </div>
   {/each}
+  <div class="entry">
+    <MultilineTextarea placeholder="why am I floating on this earth alone? I always wondered." color="white"/>
+  </div>
 </main>
 
 <style lang="stylus">
@@ -76,8 +76,10 @@
   .entry {
     border: 1px solid gray
   }
+  
   .entry > * {
     width: 100%
+    padding: 0.5em;
   }
   .entry:nth-child(n+1):not(:last-child) {
     margin-bottom: 1em
