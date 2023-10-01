@@ -46,9 +46,14 @@
 </template> -->
 
 <main bind:this={main} class="border">
-  Node
-  <MultilineTextarea placeholder="why am I floating on this earth alone? I always wondered." color="white"/>
+  <div class="entry">
+    Node
+  </div>
+  <div class="entry">
+    <MultilineTextarea placeholder="why am I floating on this earth alone? I always wondered." color="white"/>
+  </div>
   {#each Object.entries(thot.props) as p}
+    <div class="entry">
     {#if typeof p[1] != "object"}
       <MultilineTextarea placeholder={p[0]} value={p[1]} color="white"/>
     {:else}
@@ -56,6 +61,7 @@
         <input type="number" placeholder={p[0]} min="1" max="100">
       {/if}
     {/if}
+    </div>
   {/each}
 </main>
 
@@ -65,9 +71,11 @@
     overflow: hidden;
     transition: width 0.5s ease, height 0.5s ease;
   }
-  main > * {
-    width: 100%
+  .entry {
     margin-bottom: 1em
+  }
+  .entry > * {
+    width: 100%
   }
 
 </style>
