@@ -292,7 +292,8 @@ export const panzoom = (selector, options={}) => {
 		if(e.target !== e.currentTarget) return;
 		
 		const deltaScale =  e.wheelDelta*wheel_step/120;
-		do_zoom(e.target, deltaScale, e.offsetX, e.offsetY);		
+    do_zoom(e.target, deltaScale, e.offsetX, e.offsetY);		
+    
 	}
 
 	function handle_gotpointercapture(e) {

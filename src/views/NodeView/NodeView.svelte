@@ -55,21 +55,58 @@
   setContext('focusNode', focusNode)
 
   onMount(() => {
+    document.addEventListener("DOMContentLoaded", (e) => {
+      panzoom('#space', {bound:'none'});
+    });
   })
 
-  document.addEventListener("DOMContentLoaded", (e) => {
-    panzoom('#space', {bound:'none'});
+  function enablePanzoom() {
+    let elems = document.querySelectorAll("#space > *")
+    for (let i = 0; i < elems.length; i++) {
+      let elem = elems[i];
+      elem.style.pointerEvents = "none"
+    }
+  }
+  function disablePanzoom() {
+    let elems = document.querySelectorAll("#space > *")
+    for (let i = 0; i < elems.length; i++) {
+      let elem = elems[i];
+      elem.style.pointerEvents = "auto"
+    }
+  }
+
+  //와 이거 대박인데.
+  /* document.addEventListener("click", function(evnt){
+    console.log(evnt.target.id);
+  }); */
+  
+  document.addEventListener("keydown", function(e){
+    if (e.shiftKey) {
+      enablePanzoom()
+    }
   });
+
+  document.addEventListener("keyup", function(e){
+    if (!e.shiftKey) {
+      disablePanzoom()
+    }
+  });
+
+  function onSpaceClick() {
+    
+  }
+
+
 
   /* function onSpaceClick() {
     relationsColumn.relations.update((data) => {return []})
   } */
-  
+
 </script>
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div bind:this={space} id="space">
+<div bind:this={space} id="space" on:click={onSpaceClick}>
   <main>
     {#each columnsNo as cN, i}
     <NodeColumn bind:this={Columns[i]} {i} {thots} />
@@ -83,12 +120,14 @@
 <style lang="stylus">
   #space {
     position: absolute
-    width: 1000px
-    height: 1000px
+    width: 100em
+    height: 100em
     display: flex;
     justify-content: center;
     align-items: center
     overflow: hidden;
+    cursor: move
+    pointer-event: auto;
   }
   main {
     display: flex;
