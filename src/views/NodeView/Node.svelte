@@ -2,7 +2,7 @@
 
 <script>
   /* import {tile} from "./NodeViewStore" */
-  import {onMount, getContext} from "svelte"
+  import {onMount, afterUpdate, getContext} from "svelte"
   import MultilineTextarea from "../../lib/MultilineTextarea.svelte";
   import Entry from "./Entry.svelte";
   export let i, ii, thot
@@ -34,6 +34,12 @@
     }
   
   onMount(() => {
+    main.style.height = main.scrollHeight+"px";
+    /* let adjustHeight = setInterval(() => {
+    main.style.height = main.scrollHeight+"px"; console.log("!")}
+    , 100)
+    setTimeout(() => {clearInterval(adjustHeight)}, 1000) */
+    
     if (typewritter) {
       typewrite(main, 'innerText')
     }
@@ -84,6 +90,11 @@
 </template> -->
 
 <div id="main" bind:this={main} class="border">
+  {#if !Object.keys(thot.props).includes("heading")}
+  <div id='heading'>
+    <button id="focus">F</button>
+  </div>
+  {/if}
   {#each Object.entries(thot.props) as p}
     {#if p[0] === "heading"}
     <div id='heading'>
@@ -94,21 +105,21 @@
     </div>
     {:else}
       <div class="entry">
-      {#if typeof p[1] != "object"}
-      <Entry key={p[0]} on:delProp={delProp}>
-        <MultilineTextarea key={p[0]} placeholder={p[0]} value={""} textAlign={p[1].textAlign} on:focus={onTextareaFocus} on:input={onTextareaInput}/>
-      </Entry>
-      {:else}
-        {#if p[1].type === "Int"}
-          <Entry key={p[0]} on:delProp={delProp}>
-            <input type="number" placeholder={p[0]} min="1" max="100">
-          </Entry>
-          {:else}
-          <Entry key={p[0]} on:delProp={delProp}>
-            <MultilineTextarea key={p[0]} placeholder={p[0]} value={""} textAlign={p[1].textAlign} on:focus={onTextareaFocus} on:input={onTextareaInput}/>
-          </Entry>
+        {#if typeof p[1] != "object"}
+        <Entry key={p[0]} on:delProp={delProp}>
+          <MultilineTextarea key={p[0]} placeholder={p[0]} value={""} textAlign={p[1].textAlign} on:focus={onTextareaFocus} on:input={onTextareaInput}/>
+        </Entry>
+        {:else}
+          {#if p[1].type === "Int"}
+            <Entry key={p[0]} on:delProp={delProp}>
+              <input type="number" placeholder={p[0]} min="1" max="100">
+            </Entry>
+            {:else}
+            <Entry key={p[0]} on:delProp={delProp}>
+              <MultilineTextarea key={p[0]} placeholder={p[0]} value={""} textAlign={p[1].textAlign} on:focus={onTextareaFocus} on:input={onTextareaInput}/>
+            </Entry>
+          {/if}
         {/if}
-      {/if}
       </div>
     {/if}
   {/each}
@@ -121,6 +132,9 @@
   @import "../../themes/Space/global_variables"
   #main {
     width: 20em;
+    height: 1px;
+    transition: height 1s ease
+
     padding: 1em;
     overflow: hidden;
     transition: width 0.5s ease, height 0.5s ease;

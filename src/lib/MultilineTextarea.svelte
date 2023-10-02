@@ -40,7 +40,6 @@
   }
 
   function setValues() {
-    
     if (color) {
       visibleTextarea.style.color = color;
       inputTextarea.style.caretColor = color;
@@ -100,7 +99,7 @@
     resize: none;
   }
   #visibleTextarea {
-    color: black;
+    color: white;
     background-color: transparent;
     border:none;
   }

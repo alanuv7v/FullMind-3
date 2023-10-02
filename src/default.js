@@ -43,7 +43,7 @@ const default_thot2 = {
   },
 };
 
-function isInstanceOfTemplateCheck(target, template) {
+/* function isInstanceOfTemplateCheck(target, template) {
   let beenTrue = true;
   for (key of template.keys) {
     //check if the target has all keys of the template, and the target's value's type is same as the template's.
@@ -56,4 +56,4 @@ function isInstanceOfTemplateCheck(target, template) {
       beenTrue = false;
     }
   }
-}
+} */

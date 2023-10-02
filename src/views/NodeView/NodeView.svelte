@@ -60,9 +60,15 @@
   document.addEventListener("DOMContentLoaded", (e) => {
     panzoom('#space', {bound:'none'});
   });
+
+  /* function onSpaceClick() {
+    relationsColumn.relations.update((data) => {return []})
+  } */
   
 </script>
 
+<!-- svelte-ignore a11y-no-static-element-interactions -->
+<!-- svelte-ignore a11y-click-events-have-key-events -->
 <div bind:this={space} id="space">
   <main>
     {#each columnsNo as cN, i}

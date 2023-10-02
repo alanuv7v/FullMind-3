@@ -15,7 +15,7 @@
 
   }
   :global(button:hover) {
-    box-shadow: inset 0px 0px 0px 2px light;
+    box-shadow: inset 0px 0px 0px 1px light;
   }
   :global(button:active) {
     background-color: light;
@@ -29,7 +29,9 @@
   }
 
   :global(*:focus) {
-    outline: 1px solid light;
+    //outline: 1px solid light;
+    outline: none
+    box-shadow: inset 0px 0px 0px 1px light
   }
 
   #App {
