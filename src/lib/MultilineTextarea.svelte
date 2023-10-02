@@ -71,6 +71,7 @@
     id="inputTextarea" rows="1" spellcheck="false"
     placeholder={placeholder}
     value={value}
+    style:textAlign
     style={"text-align:"+textAlign}></textarea>
   <textarea
     bind:this={visibleTextarea}

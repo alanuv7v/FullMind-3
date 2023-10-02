@@ -1,29 +1,33 @@
 <script>
   import MultilineTextarea from "../../lib/MultilineTextarea.svelte";
   import {createEventDispatcher} from 'svelte'
-  export let data
 
   const dispatch = createEventDispatcher()
 
+  export let key
+
 </script>
 <div class="entry">
-  <MultilineTextarea key={data.key} placeholder={data.key} value={data.value} 
-  color="white" textAlign={data.style.textAlign} 
+  <slot>
+
+  </slot>
+  <!-- <MultilineTextarea key={data.key} placeholder={data.key} value={data.value} textAlign={data.style.textAlign} 
   on:focus={() => dispatch('onTextareaFocusdispatch')} 
-  on:input={() => dispatch('onTextareaInput')}/>
-  <div id="util">
-    <button id="addProp">+</button>
-    <button id="delProp">-</button>
-  </div>
+  on:input={() => dispatch('onTextareaInput')}/> -->
+  <button id="delProp" on:click={() => {dispatch("delProp", key)}}>-</button>
+  <button id="addProp">+</button>
 </div>
 
 <style>
   .entry {
     display: flex;
     flex-direction: row;
+    align-items: stretch;
   }
-  #util {
-    display: flex;
-    flex-direction: column;
-  } 
+  .entry > *:first-child {
+    width: 100%
+  }
+  .entry > * {
+    padding: 0.5em;
+  }
 </style>

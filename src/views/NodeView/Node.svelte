@@ -1,9 +1,10 @@
 <svelte:options accessors />
 
 <script>
-  import {tile} from "./NodeViewStore"
+  /* import {tile} from "./NodeViewStore" */
   import {onMount, getContext} from "svelte"
   import MultilineTextarea from "../../lib/MultilineTextarea.svelte";
+  import Entry from "./Entry.svelte";
   export let i, ii, thot
 
   //settings
@@ -68,6 +69,12 @@
 
     }
 
+    function delProp(e) {
+      delete thot.props[e.detail]
+      thot = thot
+      console.log(thot.props)
+    }
+
   
 
 </script>
@@ -81,21 +88,25 @@
     {#if p[0] === "heading"}
     <div id='heading'>
       <button id="focus">F</button>
-      <button id="addProp">+</button>
-      <button id="delProp">-</button>
-      <div class="entry">
-        <MultilineTextarea key={p[0]} placeholder={p[0]} value={""} color="white" textAlign={p[1].textAlign} on:focus={onTextareaFocus} on:input={onTextareaInput}/>
-      </div>
+      <Entry key={p[0]} on:delProp={delProp}>
+        <MultilineTextarea key={p[0]} placeholder={p[0]} value={""} textAlign={p[1].textAlign} on:focus={onTextareaFocus} on:input={onTextareaInput}/>
+      </Entry>
     </div>
     {:else}
       <div class="entry">
       {#if typeof p[1] != "object"}
-        <MultilineTextarea key={p[0]} placeholder={p[0]} value={p[1]} color="white" on:focus={onTextareaFocus} on:input={onTextareaInput}/>
+      <Entry key={p[0]} on:delProp={delProp}>
+        <MultilineTextarea key={p[0]} placeholder={p[0]} value={""} textAlign={p[1].textAlign} on:focus={onTextareaFocus} on:input={onTextareaInput}/>
+      </Entry>
       {:else}
         {#if p[1].type === "Int"}
-          <input type="number" placeholder={p[0]} min="1" max="100">
+          <Entry key={p[0]} on:delProp={delProp}>
+            <input type="number" placeholder={p[0]} min="1" max="100">
+          </Entry>
           {:else}
-          <MultilineTextarea key={p[0]} placeholder={p[0]} value={""} color="white" textAlign={p[1].textAlign} on:focus={onTextareaFocus} on:input={onTextareaInput}/>
+          <Entry key={p[0]} on:delProp={delProp}>
+            <MultilineTextarea key={p[0]} placeholder={p[0]} value={""} textAlign={p[1].textAlign} on:focus={onTextareaFocus} on:input={onTextareaInput}/>
+          </Entry>
         {/if}
       {/if}
       </div>
@@ -110,7 +121,6 @@
   @import "../../themes/Space/global_variables"
   #main {
     width: 20em;
-    height: fit-content;
     padding: 1em;
     overflow: hidden;
     transition: width 0.5s ease, height 0.5s ease;
@@ -119,11 +129,6 @@
   .entry {
     //border: 1px solid gray
     box-shadow: inset 0px 0px 0px 1px gray;
-  }
-  
-  .entry > * {
-    width: 100%
-    padding: 0.5em;
   }
   .entry:nth-child(n+1):not(:last-child) {
     margin-bottom: 1em
@@ -138,6 +143,9 @@
     margin-right: 0.5em
     width: 2em
     height: 2em
+  }
+  input {
+    width: 100%;
   }
 
 </style>
