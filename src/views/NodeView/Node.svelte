@@ -74,18 +74,18 @@
     <div id='heading'>
       <button id="focus">F</button>
       <div class="entry">
-        <MultilineTextarea placeholder={p[0]} value={""} color="white" textAlign={p[1].textAlign} on:focus={onTextareaFocus}/>
+        <MultilineTextarea placeholder={p[0]} value={""} color="white" textAlign={p[1].textAlign} on:focus={onTextareaFocus} on:keydown={onTextareaKeydown}/>
       </div>
     </div>
     {:else}
       <div class="entry">
       {#if typeof p[1] != "object"}
-        <MultilineTextarea placeholder={p[0]} value={p[1]} color="white" on:focus={onTextareaFocus}/>
+        <MultilineTextarea placeholder={p[0]} value={p[1]} color="white" on:focus={onTextareaFocus} on:keydown={onTextareaKeydown}/>
       {:else}
         {#if p[1].type === "Int"}
           <input type="number" placeholder={p[0]} min="1" max="100">
           {:else}
-          <MultilineTextarea placeholder={p[0]} value={""} color="white" textAlign={p[1].textAlign} on:focus={onTextareaFocus}/>
+          <MultilineTextarea placeholder={p[0]} value={""} color="white" textAlign={p[1].textAlign} on:focus={onTextareaFocus} on:keydown={onTextareaKeydown}/>
         {/if}
       {/if}
       </div>
@@ -100,6 +100,7 @@
   @import "../../themes/Space/global_variables"
   #main {
     width: 20em;
+    height: fit-content;
     padding: 1em;
     overflow: hidden;
     transition: width 0.5s ease, height 0.5s ease;
