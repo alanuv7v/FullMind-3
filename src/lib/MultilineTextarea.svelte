@@ -21,9 +21,9 @@
     visibleTextarea.value = inputTextarea.value //높이 먼저 변한 후 value 변경됨
   }
 
-  function onTextareaChange() {  
+  function onTextareaInput() {  
     resizeTextarea() 
-    dispatch('input', {key: key, value: inputTextarea.value})
+    dispatch('input', {key: key, value: inputTextarea.value}) 
   }
 
   const dispatch = createEventDispatcher()
@@ -67,7 +67,7 @@
     bind:this={inputTextarea}
     on:keydown={(e) => {onTextareaKeydown(e)}}
     on:keyup={(e) => {onTextareaKeyUp(e)}}
-    on:input={() => onTextareaChange()}
+    on:input={() => onTextareaInput()}
     on:focus={() => onTextareaFocus()}
     id="inputTextarea" rows="1" spellcheck="false"
     placeholder={placeholder}

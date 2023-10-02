@@ -11,7 +11,6 @@
     let typewritter = false
 
   let main
-onTextareaKeydown
   let adress = [i, ii]
 
   //styling
@@ -60,8 +59,14 @@ onTextareaKeydown
       focusNode(adress)
     }
 
-    function onTextareaKeydown(e) {
-      console.log(e.key, e.value)
+    function onTextareaInput(e) {
+      console.log(e.detail.key, e.detail.value) 
+      //어쩌면 focus out 시에 저장하는게 나을수도.
+      thot.props[
+        Object.keys(thot.props).find((k) => {return k === e.detail.key})
+      ] = e.detail.value
+      console.log(thot.props)
+
     }
 
   
@@ -78,18 +83,18 @@ onTextareaKeydown
     <div id='heading'>
       <button id="focus">F</button>
       <div class="entry">
-        <MultilineTextarea key={p[0]} placeholder={p[0]} value={""} color="white" textAlign={p[1].textAlign} on:focus={onTextareaFocus} on:keydown={onTextareaKeydown}/>
+        <MultilineTextarea key={p[0]} placeholder={p[0]} value={""} color="white" textAlign={p[1].textAlign} on:focus={onTextareaFocus} on:input={onTextareaInput}/>
       </div>
     </div>
     {:else}
       <div class="entry">
       {#if typeof p[1] != "object"}
-        <MultilineTextarea key={p[0]} placeholder={p[0]} value={p[1]} color="white" on:focus={onTextareaFocus} on:keydown={onTextareaKeydown}/>
+        <MultilineTextarea key={p[0]} placeholder={p[0]} value={p[1]} color="white" on:focus={onTextareaFocus} on:input={onTextareaInput}/>
       {:else}
         {#if p[1].type === "Int"}
           <input type="number" placeholder={p[0]} min="1" max="100">
           {:else}
-          <MultilineTextarea key={p[0]} placeholder={p[0]} value={""} color="white" textAlign={p[1].textAlign} on:focus={onTextareaFocus} on:keydown={onTextareaKeydown}/>
+          <MultilineTextarea key={p[0]} placeholder={p[0]} value={""} color="white" textAlign={p[1].textAlign} on:focus={onTextareaFocus} on:input={onTextareaInput}/>
         {/if}
       {/if}
       </div>
