@@ -67,7 +67,7 @@
     on:keyup={(e) => {onTextareaKeyUp(e)}}
     on:input={() => onTextareaInput()}
     on:focus={() => onTextareaFocus()}
-    id="inputTextarea" rows="1" spellcheck="false"
+    class="inputTextarea" rows="1" spellcheck="false"
     placeholder={placeholder}
     value={value}
     style:textAlign
@@ -75,7 +75,7 @@
   <textarea
     bind:this={visibleTextarea}
     on:focus={() => inputTextarea.focus()}
-    id="visibleTextarea" spellcheck="false" rows="1"
+    class="visibleTextarea" spellcheck="false" rows="1"
     style={"text-align:"+textAlign}></textarea>
 </div>
 
@@ -98,12 +98,12 @@
     overflow-y: hidden;
     resize: none;
   }
-  #visibleTextarea {
+  .visibleTextarea {
     color: white;
     background-color: transparent;
     border:none;
   }
-  #inputTextarea {
+  .inputTextarea {
     position:absolute;
     border: none;
     color: transparent;
@@ -112,7 +112,7 @@
     /* transition: none !important; */ /* 진짜 중요 */
     caret-color: white;
   }
-  #inputTextarea::selection {
+  .inputTextarea::selection {
     color: white;
     background: #be9eff;
   }

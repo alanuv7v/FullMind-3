@@ -22,7 +22,7 @@
   let Columns = []
   let relationsColumn
 
-  let space
+  let space, main
 
   //states
   let focusedNode = null
@@ -58,21 +58,24 @@
     document.addEventListener("DOMContentLoaded", (e) => {
       panzoom('#space', {bound:'none'});
     });
+    disablePanzoom()
   })
 
   function enablePanzoom() {
-    let elems = document.querySelectorAll("#space > *")
+    main.style.pointerEvents = "none"
+    /* let elems = document.querySelectorAll("#space > *")
     for (let i = 0; i < elems.length; i++) {
       let elem = elems[i];
       elem.style.pointerEvents = "none"
-    }
+    } */
   }
   function disablePanzoom() {
-    let elems = document.querySelectorAll("#space > *")
+    main.style.pointerEvents = "auto"
+    /* let elems = document.querySelectorAll("#space > *")
     for (let i = 0; i < elems.length; i++) {
       let elem = elems[i];
       elem.style.pointerEvents = "auto"
-    }
+    } */
   }
 
   //와 이거 대박인데.
@@ -92,8 +95,10 @@
     }
   });
 
-  function onSpaceClick() {
-    
+  function onSpaceClick(e) {
+    if (e.target === space) {
+      relationsColumn.relations.set([])
+    }
   }
 
 
@@ -107,12 +112,17 @@
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div bind:this={space} id="space" on:click={onSpaceClick}>
-  <main>
+  <main bind:this={main}>
     {#each columnsNo as cN, i}
     <NodeColumn bind:this={Columns[i]} {i} {thots} />
     {/each}
     <div id="page">
       <RelationColumn bind:this={relationsColumn} />
+      <div id="signpost">
+        signpost
+        <button>◀ [A]</button>
+        <button>[B] ▶</button>
+      </div>
     </div>
   </main>
 </div>
@@ -133,5 +143,17 @@
     display: flex;
     justify-content: center;
     align-items: flex-start;
+  }
+  #page {
+    display: flex
+    flex-direction: column
+  }
+  #signpost {
+    display: flex
+    flex-direction: column
+  }
+  #signpost * {
+
+    font-size: 1.5em;
   }
 </style>

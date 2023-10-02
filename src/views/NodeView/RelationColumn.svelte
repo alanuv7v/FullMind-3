@@ -28,8 +28,8 @@
 
 <style lang="stylus">
   main {
-    position: absolute;
     width: 20em;
+    hieght: fit-content;
   }
   main > *:first-child {
     margin-top: 0.5em

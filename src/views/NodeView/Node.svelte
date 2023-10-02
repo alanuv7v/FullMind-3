@@ -33,10 +33,11 @@
       )
     }
   
-  onMount(() => {
-    main.style.height = main.scrollHeight+"px";
+  afterUpdate (() => {
+    console.log(main)
+    main.style.height = "fit-content" /* main.scrollHeight+"px"; */
     /* let adjustHeight = setInterval(() => {
-    main.style.height = main.scrollHeight+"px"; console.log("!")}
+    main.style.height = "fit-content"}
     , 100)
     setTimeout(() => {clearInterval(adjustHeight)}, 1000) */
     
@@ -132,7 +133,7 @@
   @import "../../themes/Space/global_variables"
   #main {
     width: 20em;
-    height: 1px;
+    height: fit-content
     transition: height 1s ease
 
     padding: 1em;
