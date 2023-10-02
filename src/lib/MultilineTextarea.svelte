@@ -8,7 +8,6 @@
 
   export let placeholder = ""
   export let key = ""
-
   export let value = ""
   export let color = "white"
   export let textAlign = "left"

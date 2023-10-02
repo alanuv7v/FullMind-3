@@ -65,7 +65,6 @@
       thot.props[
         Object.keys(thot.props).find((k) => {return k === e.detail.key})
       ] = e.detail.value
-      console.log(thot.props)
 
     }
 
@@ -82,6 +81,8 @@
     {#if p[0] === "heading"}
     <div id='heading'>
       <button id="focus">F</button>
+      <button id="addProp">+</button>
+      <button id="delProp">-</button>
       <div class="entry">
         <MultilineTextarea key={p[0]} placeholder={p[0]} value={""} color="white" textAlign={p[1].textAlign} on:focus={onTextareaFocus} on:input={onTextareaInput}/>
       </div>
