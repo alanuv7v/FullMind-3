@@ -11,7 +11,7 @@
     let typewritter = false
 
   let main
-
+onTextareaKeydown
   let adress = [i, ii]
 
   //styling
@@ -60,6 +60,10 @@
       focusNode(adress)
     }
 
+    function onTextareaKeydown(e) {
+      console.log(e.key, e.value)
+    }
+
   
 
 </script>
@@ -74,18 +78,18 @@
     <div id='heading'>
       <button id="focus">F</button>
       <div class="entry">
-        <MultilineTextarea placeholder={p[0]} value={""} color="white" textAlign={p[1].textAlign} on:focus={onTextareaFocus} on:keydown={onTextareaKeydown}/>
+        <MultilineTextarea key={p[0]} placeholder={p[0]} value={""} color="white" textAlign={p[1].textAlign} on:focus={onTextareaFocus} on:keydown={onTextareaKeydown}/>
       </div>
     </div>
     {:else}
       <div class="entry">
       {#if typeof p[1] != "object"}
-        <MultilineTextarea placeholder={p[0]} value={p[1]} color="white" on:focus={onTextareaFocus} on:keydown={onTextareaKeydown}/>
+        <MultilineTextarea key={p[0]} placeholder={p[0]} value={p[1]} color="white" on:focus={onTextareaFocus} on:keydown={onTextareaKeydown}/>
       {:else}
         {#if p[1].type === "Int"}
           <input type="number" placeholder={p[0]} min="1" max="100">
           {:else}
-          <MultilineTextarea placeholder={p[0]} value={""} color="white" textAlign={p[1].textAlign} on:focus={onTextareaFocus} on:keydown={onTextareaKeydown}/>
+          <MultilineTextarea key={p[0]} placeholder={p[0]} value={""} color="white" textAlign={p[1].textAlign} on:focus={onTextareaFocus} on:keydown={onTextareaKeydown}/>
         {/if}
       {/if}
       </div>

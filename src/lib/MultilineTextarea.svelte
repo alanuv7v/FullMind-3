@@ -7,6 +7,8 @@
   let visibleTextarea;
 
   export let placeholder = ""
+  export let key = ""
+
   export let value = ""
   export let color = "white"
   export let textAlign = "left"
@@ -21,16 +23,17 @@
 
   function onTextareaChange() {  
     resizeTextarea() 
+    dispatch('input', {key: key, value: inputTextarea.value})
   }
 
   const dispatch = createEventDispatcher()
   
   function onTextareaKeydown(e) {
-    console.log('KEY DOWN: '+e.key)
+    /* console.log('KEY DOWN: '+e.key) */
     dispatch('keydown', {keyevent: e})
   }
   function onTextareaKeyUp(e) {
-    console.log('KEY UP: '+e.key)
+    /* console.log('KEY UP: '+e.key) */
     dispatch('keyup', {keyevent: e})
   }
   function onTextareaFocus(e) {
