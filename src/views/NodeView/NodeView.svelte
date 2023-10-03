@@ -15,15 +15,15 @@
   import { state } from "../../data/states/state_01";
   import importModule from "../../lib/importModule";
 
+  
   let head
-  async function fetchHead() {
+  let fetched = (async function () {
     return importModule(state.loadedHead).then(obj => {
       head = obj.head;
       console.log(head.thots)
       return head.thots
     })
-  }
-  let fetched = fetchHead()
+  })()
   
     
 
@@ -62,6 +62,7 @@
     focusedNode = target */
 
     relationsColumn.relations.set(getNodeByAdress(adress).thot.relations)
+    relationsColumn.show = "relations"
 
   }
 
@@ -112,6 +113,7 @@
   function onSpaceClick(e) {
     if (e.target === space) {
       relationsColumn.relations.set([])
+      relationsColumn.show = "signpost"
     }
   }
   /* function onSpaceAuxclick(e) {
@@ -143,11 +145,6 @@
     {/each}
     <div id="page">
       <RelationColumn bind:this={relationsColumn} />
-      <div id="signpost">
-        signpost
-        <button>◀ [A]</button>
-        <button>[B] ▶</button>
-      </div>
     </div>
   </main>
 </div>
@@ -172,13 +169,5 @@
   #page {
     display: flex
     flex-direction: column
-  }
-  #signpost {
-    display: flex
-    flex-direction: column
-  }
-  #signpost * {
-
-    font-size: 1.5em;
   }
 </style>

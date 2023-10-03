@@ -88,7 +88,6 @@
 <!-- <template lang="pug">
   div#pug.pug asdf
 </template> -->
-
 <div id="main" bind:this={main} class="border">
   {#if !Object.keys(thot.props).includes("heading")}
   <div id='heading'>

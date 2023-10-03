@@ -1,22 +1,12 @@
 //import { writable, derived } from "svelte/store";
+import { default_thot } from "../../default";
 
 //이 store.js 파일은 Head의 내용을 다루는 함수들을 모아넣는 "Head.js"로 바꾸고, Head의 내용은 각자 다른 ""Head 이름".json 파일에 담겨야 할 것이다.
 
 export let head = {
   thots: [
-    {
-      id: 0,
-      heading: "1st",
-      content: "thot 1",
-      children: [1, 4],
-      metadata: {},
-      customMetadata: {},
-    },
-    { id: 1, heading: "2nd", content: "thot 1.1", children: [5] },
-    { id: 2, heading: "5th", content: "thot 1.2.1", children: [3] },
-    { id: 3, heading: "6th", content: "thot 1.2.1.1", children: [] },
-    { id: 4, heading: "4th", content: "thot 1.2", children: [2] },
-    { id: 5, heading: "3th", content: "thot 1.1.1", children: [] },
+    default_thot,
+    default_thot
   ],
 };
 

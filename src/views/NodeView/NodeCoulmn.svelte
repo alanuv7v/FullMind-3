@@ -13,11 +13,11 @@
 <main>
   {#await fetched}
     <p>...Loading</p>
-  {:then thots} 
-
-    <!-- {#each thots as thot, ii}
+  {:then thots} <!-- 
+    {JSON.stringify(thots)} -->
+    {#each thots as thot, ii}
     <Node bind:this={Nodes[ii]} {i} {ii} {thot}/>
-    {/each} -->
+    {/each}
   {:catch error}
     <p>오류가 발생했습니다.</p>
   {/await}
