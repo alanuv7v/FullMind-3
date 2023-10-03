@@ -5,7 +5,7 @@
 
   import { default_container_data } from '../../default';
   import {setContext} from "svelte"
-  import {thisHead} from "../../heads/head_1"
+  import {head} from "../../data/heads/head_1"
 
 
 

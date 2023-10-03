@@ -2,8 +2,20 @@
 
 <script>
   import Node from "./Node.svelte";
+  import Entry from "./Entry.svelte";
   import { writable } from "svelte/store";
+  import { state } from "../../data/states/state_01";
+  import importModule from "../../lib/importModule";
+
+  let head
+  importModule(state.loadedHead).then(obj => {
+    head = obj.head;
+    
+    
+  })
   
+
+
   export let relations = writable([])
   
   let main
@@ -11,16 +23,23 @@
   $: if ($relations.length > 0) {
     main.style.height = "fit-content"
   }
+  function delProp() {
+
+  }
 
 </script>
   
 <main bind:this={main} class="border">
   <div>relations</div>
   {#if relations}
-    {#each $relations as relation}
+    {#each $relations as key}
       <div class="relation">
-        <button>{Object.keys(relation)[0]}</button>
-        <button>{Object.keys(relation)[1]}</button>
+        <Entry {key} on:delProp={delProp}>
+          <button>{Object.keys(key)[0] + " ["+ Object.values(Object.values(key)[0]).length + "]"}</button>
+        </Entry>
+        <Entry {key} on:delProp={delProp}>
+          <button>{Object.keys(key)[1] + " ["+ Object.values(Object.values(key)[1]).length + "]"}</button>
+        </Entry>
       </div>
     {/each}
   {/if}

@@ -34,7 +34,6 @@
     }
   
   afterUpdate (() => {
-    console.log(main)
     main.style.height = "fit-content" /* main.scrollHeight+"px"; */
     /* let adjustHeight = setInterval(() => {
     main.style.height = "fit-content"}

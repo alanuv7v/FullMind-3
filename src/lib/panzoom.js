@@ -222,7 +222,6 @@ export const panzoom = (selector, options={}) => {
 		if(!e.target.hasPointerCapture(e.pointerId)) return;
 		e.preventDefault();
 		e.stopPropagation();
-    console.log("!")
 
 		// Detect when the cursor exits parent node
 		//const {x:xp, y:yp, width:widthp, height:heightp} = e.target.parentNode.getBoundingClientRect();

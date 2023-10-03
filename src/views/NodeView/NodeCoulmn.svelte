@@ -2,7 +2,7 @@
 
 <script>
   import Node from "./Node.svelte";
-  export let i, thots
+  export let i, fetched
 
   export let Nodes = []
 
@@ -11,9 +11,16 @@
 </script>
 
 <main>
-  {#each thots as thot, ii}
-   <Node bind:this={Nodes[ii]} {i} {ii} {thot}/>
-  {/each}
+  {#await fetched}
+    <p>...Loading</p>
+  {:then thots} 
+
+    <!-- {#each thots as thot, ii}
+    <Node bind:this={Nodes[ii]} {i} {ii} {thot}/>
+    {/each} -->
+  {:catch error}
+    <p>오류가 발생했습니다.</p>
+  {/await}
 </main>
 
 <style>

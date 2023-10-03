@@ -2,20 +2,33 @@
 
 
 <script>
-    import {panzoom} from "../../lib/panzoom"
+  import {panzoom} from "../../lib/panzoom"
+  
+  import {onMount, setContext} from "svelte"
+  import { writable, derived } from "svelte/store";
+  import {default_thot, default_container_data} from "../../default.js"
+
+  import Node from "./Node.svelte";
+  import NodeColumn from "./NodeCoulmn.svelte"
+  import RelationColumn from "./RelationColumn.svelte"
+
+  import { state } from "../../data/states/state_01";
+  import importModule from "../../lib/importModule";
+
+  let head
+  async function fetchHead() {
+    return importModule(state.loadedHead).then(obj => {
+      head = obj.head;
+      console.log(head.thots)
+      return head.thots
+    })
+  }
+  let fetched = fetchHead()
+  
     
-    import {onMount, setContext} from "svelte"
-    import { writable, derived } from "svelte/store";
-    import {thisHead} from "../../heads/head_1.js"
-    import {default_thot, default_container_data} from "../../default.js"
 
-    import Node from "./Node.svelte";
-    import NodeColumn from "./NodeCoulmn.svelte"
-    import RelationColumn from "./RelationColumn.svelte"
-
-
-  let thot = default_thot
-  let thots = [thot, thot, thot]
+  /* let thot = default_thot
+  let thots = [thot, thot, thot] */
   let relations = []
 
   let columnsNo = [0]
@@ -70,6 +83,7 @@
     } */
   }
   function disablePanzoom() {
+    console.log("disablepanzoom " + main)
     main.style.pointerEvents = "auto"
     /* let elems = document.querySelectorAll("#space > *")
     for (let i = 0; i < elems.length; i++) {
@@ -125,7 +139,7 @@
 <div bind:this={space} id="space" on:click={onSpaceClick}>
   <main bind:this={main}>
     {#each columnsNo as cN, i}
-    <NodeColumn bind:this={Columns[i]} {i} {thots} />
+    <NodeColumn bind:this={Columns[i]} {i} {fetched} />
     {/each}
     <div id="page">
       <RelationColumn bind:this={relationsColumn} />

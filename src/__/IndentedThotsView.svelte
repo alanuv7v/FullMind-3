@@ -1,8 +1,8 @@
 <script>
-  import Container from "./Container.svelte"
+  import Container from "../Container.svelte"
   import { writable, derived } from "svelte/store";
-  import {thisHead} from "./heads/head_1.js"
-  import {default_thot, default_container_data} from "./default.js"
+  import {thisHead} from "../heads/head_1.js"
+  import {default_thot, default_container_data} from "../default.js"
   import {onMount, setContext} from "svelte"
 
   let fetchedContainers = writable()
