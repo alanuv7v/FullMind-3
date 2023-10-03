@@ -7,6 +7,8 @@
   import Entry from "./Entry.svelte";
   export let i, ii, thot
 
+  /* thot['asdf'] = 'asdfsadff' */
+
   //settings
     let initGrow = true
     let typewritter = false

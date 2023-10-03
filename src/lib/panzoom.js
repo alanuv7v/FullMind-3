@@ -1,4 +1,4 @@
-export const panzoom = (targets, options={}) => {
+export const panzoom = (elem, options={}, children_) => {
 
 	// Default Parameters
 	const pan = options.pan !== false;
@@ -21,39 +21,8 @@ export const panzoom = (targets, options={}) => {
 	let pinch_dist1;
 
   //custom
-  let children
   let pointerButtons
-
-	// Attach event listeners
-  if (!Array.isArray(targets)) {
-    targets = [targets]
-  }
-	targets.forEach( (elem) => {
-		let isValid = normalize(elem);
-		if(!isValid) return;
-
-    children = elem.children
-
-		if(zoom) {
-			elem.addEventListener("wheel", handle_wheel, {passive: false});
-		} 
-		if(pan) {
-			// Touch events, needed for pinch/zoom 
-			elem.addEventListener("touchstart", handle_touchstart);
-			elem.addEventListener("touchmove", handle_touchmove);
-			elem.addEventListener("touchend", handle_touchend);
-
-			// Pointer events, needed for move
-			elem.addEventListener("pointerdown", handle_pointerdown);
-			elem.addEventListener("pointerup", handle_pointerup);
-			elem.addEventListener("pointermove", handle_pointermove);
-			//elem.addEventListener("pointercancel", handle_pointerup);
-			//elem.addEventListener("pointerout", handle_pointerup);
-			//elem.addEventListener("pointerleave", handle_pointerup);			
-
-			//elem.addEventListener("gotpointercapture", handle_gotpointercapture);	// Not needed for now
-		}			
-	});
+  let children
 
 	function normalize(elem) {
 		const width = elem.offsetWidth;
@@ -329,6 +298,38 @@ export const panzoom = (targets, options={}) => {
 	function handle_gotpointercapture(e) {
 
 	}
+  
+	// Attach event listeners
+  let isValid = normalize(elem);
+  if(!isValid) return;
+
+  if (children_) {
+    children = children_
+    console.log(children)
+  } else {
+    children = elem.children
+  }
+
+  if(zoom) {
+    elem.addEventListener("wheel", handle_wheel, {passive: false});
+  } 
+
+  if(pan) {
+    // Touch events, needed for pinch/zoom 
+    elem.addEventListener("touchstart", handle_touchstart);
+    elem.addEventListener("touchmove", handle_touchmove);
+    elem.addEventListener("touchend", handle_touchend);
+
+    // Pointer events, needed for move
+    elem.addEventListener("pointerdown", handle_pointerdown);
+    elem.addEventListener("pointerup", handle_pointerup);
+    elem.addEventListener("pointermove", handle_pointermove);
+    //elem.addEventListener("pointercancel", handle_pointerup);
+    //elem.addEventListener("pointerout", handle_pointerup);
+    //elem.addEventListener("pointerleave", handle_pointerup);			
+
+    //elem.addEventListener("gotpointercapture", handle_gotpointercapture);	// Not needed for now
+  }
 
 	return (true);
-};
+}

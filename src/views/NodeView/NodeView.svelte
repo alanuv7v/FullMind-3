@@ -24,6 +24,11 @@
       return head.thots
     })
   })()
+
+  setInterval(
+    () => console.log(fetched)
+    , 5000
+  )
   
     
 
@@ -70,13 +75,15 @@
 
   onMount(() => {
     document.addEventListener("DOMContentLoaded", (e) => {
-      panzoom(space, {bound:'none'});
+      panzoom(space, {bound:'outer'}, main.children);
     });
     disablePanzoom()
   })
 
   function enablePanzoom() {
-    main.style.pointerEvents = "none"
+    for (let c of main.children) {
+      c.style.pointerEvents = "none"
+    }
     /* let elems = document.querySelectorAll("#space > *")
     for (let i = 0; i < elems.length; i++) {
       let elem = elems[i];
@@ -85,7 +92,9 @@
   }
   function disablePanzoom() {
     console.log("disablepanzoom " + main)
-    main.style.pointerEvents = "auto"
+    for (let c of main.children) {
+      c.style.pointerEvents = "auto"
+    }
     /* let elems = document.querySelectorAll("#space > *")
     for (let i = 0; i < elems.length; i++) {
       let elem = elems[i];
@@ -152,19 +161,23 @@
 <style lang="stylus">
   #space {
     position: absolute
-    width: 100em
-    height: 100em
+    width: 1000em
+    height: 1000em
     display: flex;
     justify-content: center;
     align-items: center
     overflow: hidden;
     cursor: move
-    pointer-event: auto;
+    pointer-events: auto;
   }
   main {
     display: flex;
     justify-content: center;
     align-items: flex-start;
+    pointer-events: none;
+  }
+  main > * {
+    pointer-events: auto;
   }
   #page {
     display: flex

@@ -78,8 +78,8 @@ let container = {
     <button>⮟</button>
     <button>⮜</button>
     <button>⮞</button>
-    <button>save this head as JSON</button>
-    <button>save focused thot as JSON</button>
+    <button>save this head</button>
+    <button>save focused thot</button>
   </div>
   <div id='background'></div>
   <!-- <div id='test'>
