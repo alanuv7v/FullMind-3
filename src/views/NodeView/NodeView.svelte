@@ -100,7 +100,18 @@
       relationsColumn.relations.set([])
     }
   }
-
+  /* function onSpaceAuxclick(e) {
+    switch (e.button) {
+      case 1: //middle mouse button down
+        e.preventDefault();
+        enablePanzoom()
+        break;
+    
+      default:
+        break;
+    }
+  }
+ */
 
 
   /* function onSpaceClick() {

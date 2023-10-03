@@ -20,10 +20,17 @@ export const panzoom = (selector, options={}) => {
 	let isTouching = false;
 	let pinch_dist1;
 
+  //custom
+  let children
+  let pointerButtons
+
 	// Attach event listeners
 	document.querySelectorAll(':scope '+selector).forEach( (elem) => {
 		let isValid = normalize(elem);
 		if(!isValid) return;
+
+    children = elem.children
+
 		if(zoom) {
 			elem.addEventListener("wheel", handle_wheel, {passive: false});
 		} 
@@ -160,9 +167,11 @@ export const panzoom = (selector, options={}) => {
 	}
 
 	function handle_pointerdown(e) {
+
 		if(e.target !== e.currentTarget) return;
 		e.preventDefault();
 		e.stopPropagation();		
+    
 
 		vvpScale = window.visualViewport.scale;		// It's pinch default gesture zoom (Android). Ignore in Desktop
 		dprScale = window.devicePixelRatio;			// Needed if e.screenX is used. Ignore in Mobile
@@ -196,24 +205,34 @@ export const panzoom = (selector, options={}) => {
 
 		e.target.setPointerCapture(e.pointerId);	// https://developer.mozilla.org/en-US/docs/Web/API/Pointer_Lock_API
 	}
-
 	function handle_pointermove(e) {
-		if(e.target !== e.currentTarget) return;
+    if(e.buttons === 4) {
+      pointerButtons = e.buttons
+      for (let c of children) {
+        c.style.pointerEvents = "none"
+      }
+      /* e.target.setPointerCapture(e.pointerId) */
+      handle_pointerdown(e)
+    } else {
+		  if(e.target !== e.currentTarget) return;
+    }
+    
+    /* console.log(e.target !== e.currentTarget, isTouching, !e.target.hasPointerCapture(e.pointerId)) */
 		if(isTouching) return;
 		if(!e.target.hasPointerCapture(e.pointerId)) return;
 		e.preventDefault();
 		e.stopPropagation();
+    console.log("!")
 
 		// Detect when the cursor exits parent node
 		//const {x:xp, y:yp, width:widthp, height:heightp} = e.target.parentNode.getBoundingClientRect();
 		//if(e.pageX<xp || e.pageX>xp+widthp || e.pageY<yp || e.pageY>yp+heightp) {
 			//e.target.releasePointerCapture(e.pointerId);
 		//}
-
 		const deltaX = e.movementX/parentScale/dprScale;		// vvpScale It's pinch default gesture zoom (Android). Ignore in Desktop
 		const deltaY = e.movementY/parentScale/dprScale;		// vvpScale It's pinch default gesture zoom (Android). Ignore in Desktop
-
-		do_move(e.target, deltaX, deltaY);
+    
+    do_move(e.target, deltaX, deltaY)
 		
 	}
 
@@ -221,7 +240,16 @@ export const panzoom = (selector, options={}) => {
 		e.preventDefault();
 		e.stopPropagation();
 		e.target.releasePointerCapture(e.pointerId);
+
+    
+    if(pointerButtons === 4) {
+      for (let c of children) {
+        c.style.pointerEvents = "auto"
+      }
+    }
+
 	}
+  
 
 	function handle_touchstart(e) {		
 		if(e.target !== e.currentTarget) return;
