@@ -1,4 +1,4 @@
-export const panzoom = (selector, options={}) => {
+export const panzoom = (targets, options={}) => {
 
 	// Default Parameters
 	const pan = options.pan !== false;
@@ -25,7 +25,10 @@ export const panzoom = (selector, options={}) => {
   let pointerButtons
 
 	// Attach event listeners
-	document.querySelectorAll(':scope '+selector).forEach( (elem) => {
+  if (!Array.isArray(targets)) {
+    targets = [targets]
+  }
+	targets.forEach( (elem) => {
 		let isValid = normalize(elem);
 		if(!isValid) return;
 

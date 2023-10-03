@@ -70,7 +70,7 @@
 
   onMount(() => {
     document.addEventListener("DOMContentLoaded", (e) => {
-      panzoom('#space', {bound:'none'});
+      panzoom(space, {bound:'none'});
     });
     disablePanzoom()
   })
