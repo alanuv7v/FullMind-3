@@ -4,6 +4,7 @@
   import Header from "./Header.svelte"
   import NodeView from "./views/NodeView/NodeView.svelte"
   import MultilineTextarea from './lib/MultilineTextarea.svelte'
+  import FixedContextMenu from "./FixedContextMenu.svelte"
   import {getContext, onMount} from 'svelte'
 
   import * as glob from './themes/green_cozy/global_variables.json';
@@ -56,9 +57,10 @@ let container = {
 
 </script>
 
-
+<link rel="icon" type="image/x-icon" href="/images/favicon.ico">
 <main id="App">
   <Fontfetcher />
+  <FixedContextMenu />
   <div id="command_palette" bind:this={command_palette}>
     <MultilineTextarea
     placeholder={

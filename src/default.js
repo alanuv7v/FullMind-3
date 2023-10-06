@@ -1,5 +1,7 @@
 export const default_thot = {
-  id: 0, //나중엔 uuid 사용해서 id 부여 고려해보자
+  id: 0, 
+  name: "",
+  authName: false,
   props: {
     heading: {type: "String", textAlign: "center"},
     content: "",
@@ -20,6 +22,7 @@ export const default_thot = {
   },
   customMetadata: {},
 };
+/* uuid 사용해서 id 부여 고려 */
 
 export const default_thot_customMetadata = {
   Done: { icon: "checkbox", visual: [] },
