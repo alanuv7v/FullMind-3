@@ -57,7 +57,7 @@ let container = {
 
 </script>
 
-<link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+<link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
 <main id="App">
   <Fontfetcher />
   <FixedContextMenu />
