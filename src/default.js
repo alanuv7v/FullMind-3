@@ -4,7 +4,7 @@ export const default_thot = {
   props: {
     /* heading: {type: "String", textAlign: "center"}, */
     content: "",
-    age: {type: "Int"},
+   /*age: {type: "Int"}, */
   },
   relations: [
     {parents: [],

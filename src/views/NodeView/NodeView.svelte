@@ -24,11 +24,6 @@
       return head.thots
     })
   })()
-
-  setInterval(
-    () => console.log(fetched)
-    , 5000
-  )
   
     
 

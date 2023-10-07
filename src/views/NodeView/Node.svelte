@@ -107,7 +107,7 @@
       console.log(thot.props)
     }
 
-  let animal = "dog"
+  let animal = "s"
 
 </script>
 
@@ -115,55 +115,52 @@
   div#pug.pug asdf
 </template> -->
 <div id="main" bind:this={main} class="border">
-  {#if !Object.keys(thot.props).includes("heading")}
+  <!-- {#if !Object.keys(thot.props).includes("heading")}
   <div id='heading'>
     <button id="focus">F</button>
   </div>
-  <section>
-    {#switch animal}
-      {:case "cat"}
-        <p>meow</p>
-      {:case "dog"}
-        <p>woof</p>
-      {:default}
-        <p>oink?</p>
-    {/switch}
-  </section>
-  {/if}
+  {/if} -->
+  <div id='heading'>
+    <button id="focus">F</button>
+    <Entry key={"content"}>
+      <MultilineTextarea key={"content"} placeholder={"...write..."} on:focus={onTextareaFocus} on:input={onTextareaInput}/>
+    </Entry>
+  </div>
   {#each Object.entries(thot.props) as p}
-    {#if p[0] === "heading"}
-    <div id='heading'>
-      <button id="focus">F</button>
-      <Entry key={p[0]} on:delProp={delProp}>
-        <MultilineTextarea key={p[0]} placeholder={p[0]} value={""} textAlign={p[1].textAlign} on:focus={onTextareaFocus} on:input={onTextareaInput}/>
-      </Entry>
-    </div>
-    {:else}
+    {#switch p[0]}
+      {:case "content"}
+      {:default}
       <div class="entry">
-        {#if typeof p[1] != "object"}
-        <Entry key={p[0]} on:delProp={delProp}>
-          <MultilineTextarea key={p[0]} placeholder={p[0]} value={""} textAlign={p[1].textAlign} on:focus={onTextareaFocus} on:input={onTextareaInput}/>
-        </Entry>
-        {:else}
-          {#if p[1].type === "Int"}
+        {#switch p[1].type}
+          {:case "int"}
             <Entry key={p[0]} on:delProp={delProp}>
               <input type="number" placeholder={p[0]} min="1" max="100">
             </Entry>
-            {:else}
+          {:default}
             <Entry key={p[0]} on:delProp={delProp}>
               <MultilineTextarea key={p[0]} placeholder={p[0]} value={""} textAlign={p[1].textAlign} on:focus={onTextareaFocus} on:input={onTextareaInput}/>
             </Entry>
+        {/switch}
+      </div>
+    {/switch}
+    
+    <!-- {#if p[0] === "heading"}
+    {:else}
+        {#if typeof p[1] != "object"}
+        {:else}
+          {#if p[1].type === "Int"}
+            {:else}
           {/if}
         {/if}
       </div>
-    {/if}
+    {/if} -->
   {/each}
 </div>
 
 <style lang="stylus">
   @import "../../themes/Space/global_variables"
   #main {
-    width: 20em;
+    width: 40em;
     height: fit-content
     transition: height 1s ease
 
@@ -186,7 +183,6 @@
     display: flex
     flex-direction: row
     align-items: center
-    margin-bottom: 1em
   }
   #focus {
     margin-right: 0.5em
