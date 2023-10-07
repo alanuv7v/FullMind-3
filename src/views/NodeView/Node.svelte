@@ -107,7 +107,7 @@
       console.log(thot.props)
     }
 
-  
+  let animal = "dog"
 
 </script>
 
@@ -119,7 +119,16 @@
   <div id='heading'>
     <button id="focus">F</button>
   </div>
-  
+  <section>
+    {#switch animal}
+      {:case "cat"}
+        <p>meow</p>
+      {:case "dog"}
+        <p>woof</p>
+      {:default}
+        <p>oink?</p>
+    {/switch}
+  </section>
   {/if}
   {#each Object.entries(thot.props) as p}
     {#if p[0] === "heading"}
