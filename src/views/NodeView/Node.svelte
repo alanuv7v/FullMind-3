@@ -93,16 +93,20 @@
     }
 
     function onTextareaInput(e) {
-      console.log(e.detail.key, e.detail.value) 
       //어쩌면 focus out 시에 저장하는게 나을수도.
       thot.props[
         Object.keys(thot.props).find((k) => {return k === e.detail.key})
       ] = e.detail.value
 
     }
-    function onHeadingKeydown(e) {
+    function onHeadingKeyUp(e) {
       if (e.detail.keyevent.key === 'Enter') {
-        
+        let contentValue = e.detail.keyevent.target.value.substr(
+          e.detail.keyevent.target.selectionStart,
+          e.detail.keyevent.target.value.length
+        ) 
+        console.log(contentValue)
+        e.detail.keyevent.target.value.pop()
       }
 
     }
@@ -129,7 +133,7 @@
   <div id='heading'>
     <button id="focus">F</button>
     <Entry key={"content"}>
-      <MultilineTextarea key={"content"} placeholder={"...write..."} on:focus={onTextareaFocus} on:input={onTextareaInput} on:keydown={onHeadingKeydown}/>
+      <MultilineTextarea key={"content"} placeholder={"...write..."} on:focus={onTextareaFocus} on:input={onTextareaInput} on:keyup={onHeadingKeyUp}/>
     </Entry>
   </div>
   {#each Object.entries(thot.props) as p}

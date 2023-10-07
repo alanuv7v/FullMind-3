@@ -85,7 +85,6 @@
     } */
   }
   function disablePanzoom() {
-    console.log("disablepanzoom " + main)
     for (let c of main.children) {
       c.style.pointerEvents = "auto"
     }
