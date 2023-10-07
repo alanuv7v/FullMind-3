@@ -3,6 +3,7 @@
 <script>
   //import from svelte
   import {getContext, setContext, createEventDispatcher, onMount} from 'svelte'
+  import { menuItems } from './fixedContextMenu_store';
   const dispatch = createEventDispatcher()
   //import modules
   //import child components
@@ -17,12 +18,11 @@
 
 </script>
 
-<template lang="pug">
-  <main>
-    <button>del</button>
-    <button>src</button>
-  </main>
-</template>
+<main>
+  {#each $menuItems as Item}
+   <button on:click={Item.function}>Item.name</button>
+  {/each}
+</main>
 
 <!-- <main>
 </main> -->

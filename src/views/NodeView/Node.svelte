@@ -5,6 +5,7 @@
   import {onMount, afterUpdate, getContext} from "svelte"
   import MultilineTextarea from "../../lib/MultilineTextarea.svelte";
   import Entry from "./Entry.svelte";
+  import {menuItems} from "../../fixedContextMenu_store"
   export let i, ii, thot
 
   /* thot['asdf'] = 'asdfsadff' */
@@ -15,6 +16,12 @@
 
   let main
   let adress = [i, ii]
+  
+  let menu
+
+  //States
+  let screen = "default" //possible screen states: ["default", "fullscreen", "zen"]
+
 
   //styling
     function typewrite(target, toChange) {
@@ -35,21 +42,22 @@
       )
     }
   
-  afterUpdate (() => {
-    main.style.height = "fit-content" /* main.scrollHeight+"px"; */
-    /* let adjustHeight = setInterval(() => {
-    main.style.height = "fit-content"}
-    , 100)
-    setTimeout(() => {clearInterval(adjustHeight)}, 1000) */
+  onMount (() => {
+    main.style.height = "fit-content" 
     
-    if (typewritter) {
-      typewrite(main, 'innerText')
-    }
-    if (initGrow) {
-      //대충 css 애니메이션. 점에서 가로선이 됬다가 세로로 길어져 열리는.
-    }
-    /* main.style.minWidth = tile[0] + 'em'
-    main.style.minHeight = tile[1] + 'em' */
+    //Context menu setting
+    menu = [
+      {name: "Fullscreen", target: main, function: (target) => {console.log(target)}},
+      {name: "Zen", target: main,  function: (target) => {target.style.width = "50vw"}}
+    ]
+    //Animation setting
+      if (typewritter) {
+        typewrite(main, 'innerText')
+      }
+      if (initGrow) {
+        //대충 css 애니메이션. 점에서 가로선이 됬다가 세로로 길어져 열리는.
+      }
+    
   })
 
 
@@ -59,6 +67,8 @@
     let focusedStyle = "inset 0px 0px 0px 4px white"
     export function focusSelf() {
       main.style.boxShadow = focusedStyle
+      menuItems.set(menu)
+      
     }
     export function unfocusSelf() {
       main.style.boxShadow = null
