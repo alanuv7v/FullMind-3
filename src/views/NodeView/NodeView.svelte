@@ -20,11 +20,10 @@
   let fetched = (async function () {
     return importModule(state.loadedHead).then(obj => {
       head = obj.head;
-      console.log(head.thots)
+      console.log("fetched thots from head: " + JSON.stringify(head.thots, null, 2))
       return head.thots
     })
   })()
-  
     
 
   /* let thot = default_thot

@@ -100,6 +100,12 @@
       ] = e.detail.value
 
     }
+    function onHeadingKeydown(e) {
+      if (e.detail.keyevent.key === 'Enter') {
+        
+      }
+
+    }
 
     function delProp(e) {
       delete thot.props[e.detail]
@@ -123,7 +129,7 @@
   <div id='heading'>
     <button id="focus">F</button>
     <Entry key={"content"}>
-      <MultilineTextarea key={"content"} placeholder={"...write..."} on:focus={onTextareaFocus} on:input={onTextareaInput}/>
+      <MultilineTextarea key={"content"} placeholder={"...write..."} on:focus={onTextareaFocus} on:input={onTextareaInput} on:keydown={onHeadingKeydown}/>
     </Entry>
   </div>
   {#each Object.entries(thot.props) as p}
