@@ -5,7 +5,7 @@
   import {onMount, afterUpdate, getContext} from "svelte"
   import MultilineTextarea from "../../lib/MultilineTextarea.svelte";
   import Entry from "./Entry.svelte";
-  import {menuItems} from "../../fixedContextMenu_store"
+  import {menuItems, menuItem} from "../../fixedContextMenu_store"
   export let i, ii, thot
 
   /* thot['asdf'] = 'asdfsadff' */
@@ -47,8 +47,22 @@
     
     //Context menu setting
     menu = [
-      {name: "Fullscreen", target: main, function: (target) => {console.log(target)}},
-      {name: "Zen", target: main,  function: (target) => {target.style.width = "50vw"}}
+      new menuItem({name: "Fullscreen", target: main, function: (target) => {console.log(target)}}),
+      new menuItem({name: "Zen", target: main,  function: (target, screen) => {
+        if (screen === "zen") {
+          screen = "default"
+          target.style.position = "inherit"; target.style.width = "20em"
+        } else {
+          screen = "zen"
+          /* let popup = target.cloneNode(true)
+          document.querySelector("#space").append(popup)
+          console.log(popup)
+          popup.style.position = "absolute"
+          popup.style.width = "50vw"
+          popup.style.zIndex = "2" */
+        }
+      
+      }}),
     ]
     //Animation setting
       if (typewritter) {
@@ -105,6 +119,7 @@
   <div id='heading'>
     <button id="focus">F</button>
   </div>
+  
   {/if}
   {#each Object.entries(thot.props) as p}
     {#if p[0] === "heading"}
@@ -134,9 +149,6 @@
       </div>
     {/if}
   {/each}
-  <div class="entry">
-    <MultilineTextarea placeholder="why am I floating on this earth alone? I always wondered." color="white"/>
-  </div>
 </div>
 
 <style lang="stylus">
@@ -150,6 +162,8 @@
     overflow: hidden;
     transition: width 0.5s ease, height 0.5s ease;
     margin-bottom: -1px
+
+    background-color: dark
   }
   .entry {
     //border: 1px solid gray
@@ -159,6 +173,7 @@
     margin-bottom: 1em
   }
   #heading {
+    width: 100%
     display: flex
     flex-direction: row
     align-items: center

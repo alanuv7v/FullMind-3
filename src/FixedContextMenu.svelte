@@ -20,7 +20,7 @@
 
 <main>
   {#each $menuItems as Item}
-   <button on:click={Item.function}>Item.name</button>
+   <button on:click={Item.function(Item.target)}>{Item.name}</button>
   {/each}
 </main>
 

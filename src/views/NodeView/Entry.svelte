@@ -6,8 +6,10 @@
 
   export let key
 
+  let main
+
 </script>
-<div class="entry">
+<main bind:this={main} class="entry">
   <slot>
 
   </slot>
@@ -16,10 +18,11 @@
   on:input={() => dispatch('onTextareaInput')}/> -->
   <button id="delProp" on:click={() => {dispatch("delProp", key)}}>-</button>
   <button id="addProp">+</button>
-</div>
+  </main>
 
 <style>
   .entry {
+    width: 100%;
     display: flex;
     flex-direction: row;
     align-items: stretch;

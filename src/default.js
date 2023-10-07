@@ -1,9 +1,8 @@
 export const default_thot = {
   id: 0, 
-  name: "",
-  authName: false,
+  authName: "D", // false or string
   props: {
-    heading: {type: "String", textAlign: "center"},
+    /* heading: {type: "String", textAlign: "center"}, */
     content: "",
     age: {type: "Int"},
   },
