@@ -9,6 +9,25 @@
 
   import * as glob from './themes/green_cozy/global_variables.json';
 
+  import { state } from "./data/states/state_01";
+  import importModule from "./lib/importModule";
+
+  function download(content, fileName, contentType) {
+    var a = document.createElement("a");
+    var file = new Blob([JSON.stringify(content, null, 2)], {type: contentType});
+    a.href = URL.createObjectURL(file);
+    a.download = fileName;
+    a.click();
+  }
+
+  let loadedHead
+  let fetched = (async function () {
+    return importModule(state.loadedHead).then(obj => {
+      loadedHead = obj.head;
+      download(loadedHead, 'json.txt', 'text/plain');
+    })
+  })() //async head import
+
 
 let container = {
   index: [1,1,1],

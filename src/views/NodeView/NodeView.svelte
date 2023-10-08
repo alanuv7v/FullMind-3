@@ -23,7 +23,7 @@
       console.log("fetched thots from head: " + JSON.stringify(head.thots, null, 2))
       return head.thots
     })
-  })()
+  })() //async head import
     
 
   /* let thot = default_thot
