@@ -22,6 +22,7 @@
 
   //States
   let screen = "default" //possible screen states: ["default", "fullscreen", "zen"]
+  let Entries_Inputs = []
 
   
 
@@ -97,6 +98,13 @@
       focusNode(adress)
     }
 
+    let focusedInput = ""
+    $: if (Entries_Inputs[focusedInput]) {
+      Entries_Inputs[focusedInput].focus()
+    }
+
+  //Event Listeners
+
     function onTextareaInput(e, key) {
       //어쩌면 focus out 시에 저장하는게 나을수도.
       thot.props[
@@ -115,8 +123,8 @@
             e.target.value.length
           ) 
           
-          thot.props.content = contentValue
-          console.log(main.children['content'])
+          thot.props['content'] = contentValue
+          focusedInput = 'content'
 
           e.target.value = e.target.value.substr(0, e.target.selectionStart) //leave only from 0 to caretPosition value for heading
           e.target.nextElementSibling.value = e.target.value
@@ -130,7 +138,10 @@
       console.log(thot.props)
     }
 
-  let animal = "s"
+    function InputInit(a, b) {
+      Entries_Inputs[b.key] = a
+      console.log(Entries_Inputs)
+    }
 
 </script>
 
@@ -140,7 +151,7 @@
     <button id="focus">F</button>
   </div>
   {/if} -->
-  {#each Object.entries(thot.props) as p}
+  {#each Object.entries(thot.props) as p, i}
     {#switch p[0]}
       {:case "heading"}
         <div id='heading'>
@@ -148,6 +159,7 @@
           <Entry key={"heading"}>
             <MultilineTextarea_>
               <textarea 
+              use:InputInit={{key: p[0]}}
               placeholder={p[0]} 
               value={p[1]} 
               on:focus={(e) => {onTextareaFocus(e)}} 
@@ -160,6 +172,7 @@
         <Entry key={"content"}>
           <MultilineTextarea_>
             <textarea 
+            use:InputInit={{key: p[0]}}
             placeholder={p[0]} 
             value={p[1]} 
             on:focus={(e) => {onTextareaFocus(e)}} 
