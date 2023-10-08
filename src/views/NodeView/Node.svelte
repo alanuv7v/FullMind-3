@@ -4,6 +4,7 @@
   /* import {tile} from "./NodeViewStore" */
   import {onMount, afterUpdate, getContext} from "svelte"
   import MultilineTextarea from "../../lib/MultilineTextarea.svelte";
+  import MultilineTextarea_ from "../../lib/MultilineTextarea_.svelte";
   import Entry from "./Entry.svelte";
   import {menuItems, menuItem} from "../../fixedContextMenu_store"
   export let i, ii, thot
@@ -14,13 +15,28 @@
     let initGrow = true
     let typewritter = false
 
-  let main
-  let adress = [i, ii]
-  
-  let menu
+  //binding components
+    let main
+    let menu
 
   //States
-  let screen = "default" //possible screen states: ["default", "fullscreen", "zen"]
+   let adress = [i, ii]
+    let screen = "default" //possible screen states: ["default", "fullscreen", "zen"]
+    let Entries_Inputs = []
+
+    let entries = []
+
+  $: if (thot.props) {
+    for (p of Object.entries(thot.props)) {
+      let entry = {
+        key: p[0],
+        value: p[0],
+        Initfocus: false
+      }
+      entries = [entry, ...entries]
+    }
+  }
+    
 
 
   //styling
@@ -51,9 +67,10 @@
       new menuItem({name: "Zen", target: main,  function: (target, screen) => {
         if (screen === "zen") {
           screen = "default"
-          target.style.position = "inherit"; target.style.width = "20em"
+          target.style.height = "fit-content"
         } else {
           screen = "zen"
+          target.style.height = "20em"
           /* let popup = target.cloneNode(true)
           document.querySelector("#space").append(popup)
           console.log(popup)
@@ -82,6 +99,7 @@
     export function focusSelf() {
       main.style.boxShadow = focusedStyle
       menuItems.set(menu)
+
       
     }
     export function unfocusSelf() {
@@ -92,23 +110,32 @@
       focusNode(adress)
     }
 
-    function onTextareaInput(e) {
+  //Event Listeners
+    function onTextareaInput(e, key) {
       //어쩌면 focus out 시에 저장하는게 나을수도.
       thot.props[
-        Object.keys(thot.props).find((k) => {return k === e.detail.key})
-      ] = e.detail.value
+        Object.keys(thot.props).find((k) => {return k === key})
+      ] = e.target.value
 
     }
-    function onHeadingKeyUp(e) {
-      if (e.detail.keyevent.key === 'Enter') {
-        let contentValue = e.detail.keyevent.target.value.substr(
-          e.detail.keyevent.target.selectionStart,
-          e.detail.keyevent.target.value.length
-        ) 
-        console.log(contentValue)
-        e.detail.keyevent.target.value.pop()
-      }
+    function onHeadingKeydown(e, key) {
+      onTextareaInput(e, key)
+      if (e.key === 'Enter') {
+        if (!thot.props.content) {
+          e.preventDefault() //no linebreak!
 
+          let contentValue = e.target.value.substr( //get value for new "Content" prop key
+            e.target.selectionStart,
+            e.target.value.length
+          ) 
+          
+          thot.props.content = contentValue
+          console.log(main.children['content'])
+
+          e.target.value = e.target.value.substr(0, e.target.selectionStart) //leave only from 0 to caretPosition value for heading
+          e.target.nextElementSibling.value = e.target.value
+        }
+      }
     }
 
     function delProp(e) {
@@ -121,24 +148,41 @@
 
 </script>
 
-<!-- <template lang="pug">
-  div#pug.pug asdf
-</template> -->
 <div id="main" bind:this={main} class="border">
   <!-- {#if !Object.keys(thot.props).includes("heading")}
   <div id='heading'>
     <button id="focus">F</button>
   </div>
   {/if} -->
-  <div id='heading'>
-    <button id="focus">F</button>
-    <Entry key={"content"}>
-      <MultilineTextarea key={"content"} placeholder={"...write..."} on:focus={onTextareaFocus} on:input={onTextareaInput} on:keyup={onHeadingKeyUp}/>
-    </Entry>
-  </div>
-  {#each Object.entries(thot.props) as p}
+  {#each Object.entries(thot.props) as p, i}
     {#switch p[0]}
+      {:case "heading"}
+        <div id='heading'>
+          <button id="focus">F</button>
+          <Entry key={"heading"}>
+            <MultilineTextarea_>
+              <textarea 
+              bind:this = {Entries_Inputs[i]}
+              placeholder={p[0]} 
+              value={p[1]} 
+              on:focus={(e) => {onTextareaFocus(e)}} 
+              on:keydown={(e) => {onHeadingKeydown(e, p[0])}}></textarea>
+              <textarea></textarea>
+            </MultilineTextarea_>
+          </Entry>
+        </div>
       {:case "content"}
+        <Entry key={"content"}>
+          <MultilineTextarea_>
+            <textarea 
+            bind:this = {Entries_Inputs[i]}
+            placeholder={p[0]} 
+            value={p[1]} 
+            on:focus={(e) => {onTextareaFocus(e)}} 
+            on:input={(e) => {onTextareaInput(e, p[0])}}></textarea>
+            <textarea></textarea>
+          </MultilineTextarea_>
+        </Entry>
       {:default}
       <div class="entry">
         {#switch p[1].type}

@@ -33,7 +33,7 @@
   }
   function onTextareaKeyUp(e) {
     /* console.log('KEY UP: '+e.key) */
-    dispatch('keyup', {keyevent: e})
+    dispatch('keyup', {keyevent: e, inputTextarea: inputTextarea, visibleTextarea: visibleTextarea})
   }
   function onTextareaFocus(e) {
     dispatch('focus')

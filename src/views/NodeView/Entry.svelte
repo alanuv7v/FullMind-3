@@ -9,7 +9,7 @@
   let main
 
 </script>
-<main bind:this={main} class="entry">
+<main bind:this={main} id={key} class="entry" >
   <slot>
 
   </slot>
@@ -18,7 +18,7 @@
   on:input={() => dispatch('onTextareaInput')}/> -->
   <button id="delProp" on:click={() => {dispatch("delProp", key)}}>-</button>
   <button id="addProp">+</button>
-  </main>
+</main>
 
 <style>
   .entry {
