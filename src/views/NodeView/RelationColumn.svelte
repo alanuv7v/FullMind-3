@@ -6,11 +6,7 @@
   import { writable } from "svelte/store";
   import { state } from "../../data/states/state_01";
   import importModule from "../../lib/importModule";
-
-  let head
-  importModule(state.loadedHead).then(obj => {
-    head = obj;
-  })
+  
   
   export let show = "signpost"
 

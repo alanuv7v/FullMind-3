@@ -11,16 +11,9 @@
 </script>
 
 <main>
-  {#await thots}
-    <p>...Loading</p>
-  {:then thots} <!-- 
-    {JSON.stringify(thots)} -->
-    {#each thots as thot, ii}
+  {#each thots as thot, ii}
     <Node bind:this={Nodes[ii]} {i} {ii} {thot}/>
-    {/each}
-  {:catch error}
-    <p>오류가 발생했습니다.</p>
-  {/await}
+  {/each}
 </main>
 
 <style>

@@ -5,13 +5,14 @@
   import NodeView from "./views/NodeView/NodeView.svelte"
   import MultilineTextarea from './lib/MultilineTextarea.svelte'
   import FixedContextMenu from "./FixedContextMenu.svelte"
-  import {getContext, onMount} from 'svelte'
+  import {onMount} from 'svelte'
 
   import * as glob from './themes/green_cozy/global_variables.json';
-
-  import { state } from "./data/states/state_01";
+  
   import importModule from "./lib/importModule";
   import stringify from "json-stringify-pretty-compact";
+
+  import * as settings from "./data/settings/settings.json"
 
   function save(content, contentType) {
     var a = document.createElement("a");
@@ -26,12 +27,15 @@
     a.click();
   }
 
-  let loadedHead
-  let fetched = (async function () {
-    return importModule(state.loadedHeadPath).then(obj => {
-      loadedHead = obj.head;
-    })
-  })() //async head import
+  let loadedHead = 
+  importModule(settings.lastState)
+  .then(obj => {
+    return obj.state
+  })
+  .then(state => {
+    return importModule(state.loadedHeadPath)
+  })
+  
 
 
 let container = {
@@ -95,8 +99,14 @@ let container = {
     />
   </div>
   <Header />
-  <div id="content" class="border">
-    <NodeView />
+  <div id="content">
+    {#await loadedHead}
+      <p>...Loading</p>
+    {:then loadedHead} 
+      <NodeView {loadedHead} />
+    {:catch error}
+      <p>오류가 발생했습니다.</p>
+    {/await}
   </div>
   <div id="keyboard_toolbar" bind:this={keyboard_toolbar}>
     <button>⮝</button>
@@ -104,7 +114,7 @@ let container = {
     <button>⮟</button>
     <button>⮜</button>
     <button>⮞</button>
-    <button on:click={() => {download(loadedHead, loadedHead.name +'.txt', 'text/plain')}}>download this head</button>
+    <button on:click={() => {download(loadedHead, loadedHead.name +'.json', 'application/json')}}>download this head</button>
     <button on:click={() => {}}>save this head</button>
     <button>download focused thot</button>
   </div>

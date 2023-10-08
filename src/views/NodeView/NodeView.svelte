@@ -11,32 +11,9 @@
   import NodeColumn from "./NodeCoulmn.svelte"
   import RelationColumn from "./RelationColumn.svelte"
 
-  import { state } from "../../data/states/state_01";
-  import importModule from "../../lib/importModule";
-
-  import * as settings from "../../data/settings/settings.json"
-
-  let thots = 
-  importModule(settings.lastState)
-  .then(obj => {
-    return obj.state
-  })
-  .then(state => {
-    return importModule(state.loadedHeadPath)
-  })
-  .then(obj => {
-    state.loadedHead = obj
-    return state.loadedHead.thots
-  })
+  export let loadedHead
+  let thots = loadedHead.thots
   
-  //async head import */
-
-    
-
-  /* let thot = default_thot
-  let thots = [thot, thot, thot] */
-  let relations = []
-
   let columnsNo = [0]
   let Columns = []
   let relationsColumn
@@ -75,9 +52,7 @@
   setContext('focusNode', focusNode)
 
   onMount(() => {
-    document.addEventListener("DOMContentLoaded", (e) => {
-      panzoom(space, {bound:'outer'}, main.children);
-    });
+    panzoom(space, {bound:'outer'}, main.children);
     disablePanzoom()
   })
 
