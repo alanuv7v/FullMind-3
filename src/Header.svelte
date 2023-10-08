@@ -5,15 +5,15 @@
 </div>
 <main>
   <div id="title">
-  <span style="float: left">1.head*</span>
-  <span style="float: right">Station View</span>
+    <span>1.head*</span>
+    <span style="float: right">Station View</span>
   </div>
-  <div id="tools">
+  <!-- <div id="tools">
     <button>heads...</button>
-    <button>Indented thots</button>
-    <button>Pamphlet view</button>
+    <button>Indent view</button>
+    <button>Station view</button>
     <button>Dive view</button>
-  </div>
+  </div> -->
 </main>
 
 

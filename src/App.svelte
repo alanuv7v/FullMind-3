@@ -14,6 +14,17 @@
   import stringify from "json-stringify-pretty-compact";
 
   import * as settings from "./data/settings/settings.json"
+  
+  import {menuItems} from "./fixedContextMenu_store"
+
+  let menu = [
+    {name: "Head", target: null, function: () => {menuItems.set([
+      {name: "Download", target: null, function:null}
+    ])}},
+    {name: "Thot", target: null, function: null}
+  ]
+
+  menuItems.set(menu)
 
 
 function download(content, fileName, contentType) {
@@ -91,6 +102,8 @@ let container = {
 <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
 <main id="App">
   <Fontfetcher />
+  
+  <Header />
   <FixedContextMenu />
   <div id="command_palette" bind:this={command_palette}>
     <MultilineTextarea
@@ -101,7 +114,6 @@ let container = {
     color={glob.light}
     />
   </div>
-  <Header />
   <div id="content">
     {#await $loadedHead}
       <div>...Loading</div>

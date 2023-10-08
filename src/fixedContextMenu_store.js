@@ -16,6 +16,8 @@ export const menuItem = attributes({
 export const menuItems = writable([
 ])
 
+export const menus = writable([])
+
 
 
 /* The attributes "wraps" the Class, still providing access to its methods: */
