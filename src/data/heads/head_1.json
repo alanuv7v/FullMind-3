@@ -4,7 +4,7 @@
     {
       "id": 0,
       "authName": "D",
-      "props": {"content": "asfd"},
+      "props": {"content": ""},
       "relations": [
         {"parents": [], "children": []},
         {"conclusions": [], "reasons": []},

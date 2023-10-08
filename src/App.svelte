@@ -6,6 +6,7 @@
   import MultilineTextarea from './lib/MultilineTextarea.svelte'
   import FixedContextMenu from "./FixedContextMenu.svelte"
   import {onMount} from 'svelte'
+  import {writable} from 'svelte/store'
 
   import * as glob from './themes/green_cozy/global_variables.json';
   
@@ -14,28 +15,29 @@
 
   import * as settings from "./data/settings/settings.json"
 
-  function save(content, contentType) {
-    var a = document.createElement("a");
-    var file = new Blob([stringify(content, {maxLength: 60, indent: 2})], {type: contentType});
-  }
+function save(content, contentType) {
+  var a = document.createElement("a");
+  var file = new Blob([stringify(content, {maxLength: 60, indent: 2})], {type: contentType});
+}
 
-  function download(content, fileName, contentType) {
-    var a = document.createElement("a");
-    var file = new Blob([stringify(content, {maxLength: 60, indent: 2})], {type: contentType});
-    a.href = URL.createObjectURL(file);
-    a.download = fileName;
-    a.click();
-  }
+function download(content, fileName, contentType) {
+  var a = document.createElement("a");
+  var file = new Blob([stringify(content, {maxLength: 60, indent: 2})], {type: contentType});
+  a.href = URL.createObjectURL(file);
+  a.download = fileName;
+  a.click();
+}
 
-  let loadedHead = 
-  importModule(settings.lastState)
-  .then(obj => {
-    return obj.state
-  })
-  .then(state => {
-    return importModule(state.loadedHeadPath)
-  })
-  
+let head =
+importModule(settings.lastState) //state.js
+.then(obj => {
+  return obj.state
+})
+.then(state => {
+  return importModule(state.loadedHeadPath) //head_1.json
+});
+
+let loadedHead = writable(head)
 
 
 let container = {
@@ -100,9 +102,10 @@ let container = {
   </div>
   <Header />
   <div id="content">
-    {#await loadedHead}
-      <p>...Loading</p>
+    {#await $loadedHead}
+      <div>...Loading</div>
     {:then loadedHead} 
+      {stringify(loadedHead)}
       <NodeView {loadedHead} />
     {:catch error}
       <p>오류가 발생했습니다.</p>
@@ -115,8 +118,17 @@ let container = {
     <button>⮜</button>
     <button>⮞</button>
     <button on:click={() => {download(loadedHead, loadedHead.name +'.json', 'application/json')}}>download this head</button>
-    <button on:click={() => {}}>save this head</button>
     <button>download focused thot</button>
+    <button on:click={() => {}}>save this head</button>
+    <button>
+      <label>load a head... 
+        <input type="file" id="file-selector" accept=".txt, .json" style="display:none" on:change={async (e) => {
+          let json = await e.target.files[0].text()
+          loadedHead.set(JSON.parse(json))
+          console.log($loadedHead)
+        }}>
+      </label>
+    </button>
   </div>
   <div id='background'></div>
   <!-- <div id='test'>

@@ -11,7 +11,7 @@
   import NodeColumn from "./NodeCoulmn.svelte"
   import RelationColumn from "./RelationColumn.svelte"
 
-  export let loadedHead
+  export let loadedHead 
   let thots = loadedHead.thots
   
   let columnsNo = [0]
