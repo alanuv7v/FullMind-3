@@ -15,28 +15,15 @@
     let initGrow = true
     let typewritter = false
 
-  //binding components
-    let main
-    let menu
+  let main
+  let adress = [i, ii]
+  
+  let menu
 
   //States
-   let adress = [i, ii]
-    let screen = "default" //possible screen states: ["default", "fullscreen", "zen"]
-    let Entries_Inputs = []
+  let screen = "default" //possible screen states: ["default", "fullscreen", "zen"]
 
-    let entries = []
-
-  $: if (thot.props) {
-    for (p of Object.entries(thot.props)) {
-      let entry = {
-        key: p[0],
-        value: p[0],
-        Initfocus: false
-      }
-      entries = [entry, ...entries]
-    }
-  }
-    
+  
 
 
   //styling
@@ -110,7 +97,6 @@
       focusNode(adress)
     }
 
-  //Event Listeners
     function onTextareaInput(e, key) {
       //어쩌면 focus out 시에 저장하는게 나을수도.
       thot.props[
@@ -154,7 +140,7 @@
     <button id="focus">F</button>
   </div>
   {/if} -->
-  {#each Object.entries(thot.props) as p, i}
+  {#each Object.entries(thot.props) as p}
     {#switch p[0]}
       {:case "heading"}
         <div id='heading'>
@@ -162,7 +148,6 @@
           <Entry key={"heading"}>
             <MultilineTextarea_>
               <textarea 
-              bind:this = {Entries_Inputs[i]}
               placeholder={p[0]} 
               value={p[1]} 
               on:focus={(e) => {onTextareaFocus(e)}} 
@@ -175,7 +160,6 @@
         <Entry key={"content"}>
           <MultilineTextarea_>
             <textarea 
-            bind:this = {Entries_Inputs[i]}
             placeholder={p[0]} 
             value={p[1]} 
             on:focus={(e) => {onTextareaFocus(e)}} 
