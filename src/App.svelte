@@ -13,6 +13,11 @@
   import importModule from "./lib/importModule";
   import stringify from "json-stringify-pretty-compact";
 
+  function save(content, contentType) {
+    var a = document.createElement("a");
+    var file = new Blob([stringify(content, {maxLength: 60, indent: 2})], {type: contentType});
+  }
+
   function download(content, fileName, contentType) {
     var a = document.createElement("a");
     var file = new Blob([stringify(content, {maxLength: 60, indent: 2})], {type: contentType});
@@ -23,7 +28,7 @@
 
   let loadedHead
   let fetched = (async function () {
-    return importModule(state.loadedHead).then(obj => {
+    return importModule(state.loadedHeadPath).then(obj => {
       loadedHead = obj.head;
     })
   })() //async head import
@@ -99,8 +104,9 @@ let container = {
     <button>⮟</button>
     <button>⮜</button>
     <button>⮞</button>
-    <button on:click={() => {download(loadedHead, loadedHead.name +'.txt', 'text/plain')}}>save this head</button>
-    <button>save focused thot</button>
+    <button on:click={() => {download(loadedHead, loadedHead.name +'.txt', 'text/plain')}}>download this head</button>
+    <button on:click={() => {}}>save this head</button>
+    <button>download focused thot</button>
   </div>
   <div id='background'></div>
   <!-- <div id='test'>

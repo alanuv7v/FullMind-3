@@ -8,22 +8,29 @@
   import { writable, derived } from "svelte/store";
   import {default_thot, default_container_data} from "../../default.js"
 
-  import Node from "./Node.svelte";
   import NodeColumn from "./NodeCoulmn.svelte"
   import RelationColumn from "./RelationColumn.svelte"
 
   import { state } from "../../data/states/state_01";
   import importModule from "../../lib/importModule";
 
+  import * as settings from "../../data/settings/settings.json"
+
+  let thots = 
+  importModule(settings.lastState)
+  .then(obj => {
+    return obj.state
+  })
+  .then(state => {
+    return importModule(state.loadedHeadPath)
+  })
+  .then(obj => {
+    state.loadedHead = obj.head
+    return state.loadedHead.thots
+  })
   
-  let head
-  let fetched = (async function () {
-    return importModule(state.loadedHead).then(obj => {
-      head = obj.head;
-      console.log("fetched thots from head: " + JSON.stringify(head.thots, null, 2))
-      return head.thots
-    })
-  })() //async head import
+  //async head import */
+
     
 
   /* let thot = default_thot
@@ -143,7 +150,7 @@
 <div bind:this={space} id="space" on:click={onSpaceClick}>
   <main bind:this={main}>
     {#each columnsNo as cN, i}
-    <NodeColumn bind:this={Columns[i]} {i} {fetched} />
+    <NodeColumn bind:this={Columns[i]} {i} {thots} />
     {/each}
     <div id="page">
       <RelationColumn bind:this={relationsColumn} />

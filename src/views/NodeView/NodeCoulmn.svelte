@@ -2,7 +2,7 @@
 
 <script>
   import Node from "./Node.svelte";
-  export let i, fetched
+  export let i, thots
 
   export let Nodes = []
 
@@ -11,7 +11,7 @@
 </script>
 
 <main>
-  {#await fetched}
+  {#await thots}
     <p>...Loading</p>
   {:then thots} <!-- 
     {JSON.stringify(thots)} -->
