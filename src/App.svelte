@@ -11,10 +11,11 @@
 
   import { state } from "./data/states/state_01";
   import importModule from "./lib/importModule";
+  import stringify from "json-stringify-pretty-compact";
 
   function download(content, fileName, contentType) {
     var a = document.createElement("a");
-    var file = new Blob([JSON.stringify(content, null, 2)], {type: contentType});
+    var file = new Blob([stringify(content, {maxLength: 60, indent: 2})], {type: contentType});
     a.href = URL.createObjectURL(file);
     a.download = fileName;
     a.click();
@@ -24,7 +25,6 @@
   let fetched = (async function () {
     return importModule(state.loadedHead).then(obj => {
       loadedHead = obj.head;
-      download(loadedHead, 'json.txt', 'text/plain');
     })
   })() //async head import
 
@@ -99,7 +99,7 @@ let container = {
     <button>⮟</button>
     <button>⮜</button>
     <button>⮞</button>
-    <button>save this head</button>
+    <button on:click={() => {download(loadedHead, loadedHead.name +'.txt', 'text/plain')}}>save this head</button>
     <button>save focused thot</button>
   </div>
   <div id='background'></div>
