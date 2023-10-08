@@ -9,9 +9,7 @@
 
   let head
   importModule(state.loadedHead).then(obj => {
-    head = obj.head;
-    
-    
+    head = obj;
   })
   
   export let show = "signpost"

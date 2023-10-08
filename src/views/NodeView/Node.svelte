@@ -162,7 +162,7 @@
           <textarea 
           use:InputInit={{key: 'content'}}
           placeholder={'content'} 
-          value={""} 
+          value={Object.values(thot.props)[0]} 
           on:focus={(e) => {onTextareaFocus(e)}} 
           on:keydown={(e) => {onHeadingKeydown(e, 'content')}}></textarea>
           <textarea></textarea>

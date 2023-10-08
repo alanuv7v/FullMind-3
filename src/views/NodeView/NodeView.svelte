@@ -25,7 +25,7 @@
     return importModule(state.loadedHeadPath)
   })
   .then(obj => {
-    state.loadedHead = obj.head
+    state.loadedHead = obj
     return state.loadedHead.thots
   })
   
