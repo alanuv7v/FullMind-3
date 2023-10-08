@@ -15,10 +15,6 @@
 
   import * as settings from "./data/settings/settings.json"
 
-function save(content, contentType) {
-  var a = document.createElement("a");
-  var file = new Blob([stringify(content, {maxLength: 60, indent: 2})], {type: contentType});
-}
 
 function download(content, fileName, contentType) {
   var a = document.createElement("a");
@@ -38,6 +34,11 @@ importModule(settings.lastState) //state.js
 });
 
 let loadedHead = writable(head)
+
+//No need for save function, since textarea value is binded to loadedHead.thots[n].props['something']. 
+//The user only needs to download the head, and then load it when the app is refreshed
+
+
 
 
 let container = {
@@ -105,7 +106,6 @@ let container = {
     {#await $loadedHead}
       <div>...Loading</div>
     {:then loadedHead} 
-      {stringify(loadedHead)}
       <NodeView {loadedHead} />
     {:catch error}
       <p>오류가 발생했습니다.</p>
@@ -117,15 +117,17 @@ let container = {
     <button>⮟</button>
     <button>⮜</button>
     <button>⮞</button>
-    <button on:click={() => {download(loadedHead, loadedHead.name +'.json', 'application/json')}}>download this head</button>
+    <button on:click={async () => {let head = await $loadedHead; 
+      download(head, head.name +'.json', 'application/json')}}>
+      download this head</button>
     <button>download focused thot</button>
-    <button on:click={() => {}}>save this head</button>
+    <button on:click={async () => {console.log(await $loadedHead)}}>log this head</button>
     <button>
       <label>load a head... 
         <input type="file" id="file-selector" accept=".txt, .json" style="display:none" on:change={async (e) => {
           let json = await e.target.files[0].text()
           loadedHead.set(JSON.parse(json))
-          console.log($loadedHead)
+          console.log($loadedHead.default)
         }}>
       </label>
     </button>

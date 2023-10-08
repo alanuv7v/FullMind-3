@@ -7,6 +7,7 @@
   import MultilineTextarea_ from "../../lib/MultilineTextarea_.svelte";
   import Entry from "./Entry.svelte";
   import {menuItems, menuItem} from "../../fixedContextMenu_store"
+    import stringify from "json-stringify-pretty-compact";
   export let i, ii, thot
 
   /* thot['asdf'] = 'asdfsadff' */
@@ -162,10 +163,11 @@
           <textarea 
           use:InputInit={{key: 'content'}}
           placeholder={'content'} 
-          value={Object.values(thot.props)[0]} 
+          value={thot.props['content']} 
           on:focus={(e) => {onTextareaFocus(e)}} 
           on:keydown={(e) => {onHeadingKeydown(e, 'content')}}></textarea>
-          <textarea></textarea>
+          <textarea
+          value={thot.props['content']}></textarea>
         </MultilineTextarea_>
       </Entry>
     </div>
@@ -183,7 +185,7 @@
                   value={p[1]} 
                   on:focus={(e) => {onTextareaFocus(e)}} 
                   on:input={(e) => {onTextareaInput(e, p[0])}}></textarea>
-                  <textarea></textarea>
+                  <textarea value={p[1]}></textarea>
                 </MultilineTextarea_>
               </Entry>
             </div>
@@ -196,7 +198,7 @@
                 value={p[1]} 
                 on:focus={(e) => {onTextareaFocus(e)}} 
                 on:input={(e) => {onTextareaInput(e, p[0])}}></textarea>
-                <textarea></textarea>
+                <textarea value={p[1]}></textarea>
               </MultilineTextarea_>
             </Entry>
           {:default}

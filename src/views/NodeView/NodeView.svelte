@@ -13,6 +13,7 @@
 
   export let loadedHead 
   let thots = loadedHead.thots
+  $: thots = loadedHead.thots
   
   let columnsNo = [0]
   let Columns = []
@@ -135,14 +136,14 @@
 
 <style lang="stylus">
   #space {
-    position: absolute
-    width: 1000em
-    height: 1000em
+    position: absolute;
+    width: 1000em;
+    height: 1000em;
     display: flex;
     justify-content: center;
-    align-items: center
+    align-items: center;
     overflow: hidden;
-    cursor: move
+    cursor: move;
     pointer-events: auto;
   }
   main {
