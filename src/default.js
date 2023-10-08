@@ -2,8 +2,8 @@ export const default_thot = {
   id: 0, 
   authName: "D", // false or string
   props: {
-    heading: ""
     /* heading: {type: "String", textAlign: "center"}, */
+    content: "",
    /*age: {type: "Int"}, */
   },
   relations: [

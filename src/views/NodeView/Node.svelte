@@ -115,20 +115,23 @@
     function onHeadingKeydown(e, key) {
       onTextareaInput(e, key)
       if (e.key === 'Enter') {
-        if (!thot.props.content) {
-          e.preventDefault() //no linebreak!
+        e.preventDefault() //no linebreak!
 
-          let contentValue = e.target.value.substr( //get value for new "Content" prop key
-            e.target.selectionStart,
-            e.target.value.length
-          ) 
-          
-          thot.props['content'] = contentValue
-          focusedInput = 'content'
+        let contentValue = e.target.value.substr( //get value for new "Content" prop key
+          e.target.selectionStart,
+          e.target.value.length
+        ) 
+        
+        let heading_value = e.target.value.substr(0, e.target.selectionStart)
+        
+        delete thot.props['content']
+        thot.props['heading'] = heading_value
+        thot.props['content'] = contentValue
 
-          e.target.value = e.target.value.substr(0, e.target.selectionStart) //leave only from 0 to caretPosition value for heading
-          e.target.nextElementSibling.value = e.target.value
-        }
+        /* e.target.value = heading_value //leave only from 0 to caretPosition value for heading
+        e.target.nextElementSibling.value = heading_value //visibleTextarea value set */
+        
+        focusedInput = 'content'
       }
     }
 
@@ -151,49 +154,68 @@
     <button id="focus">F</button>
   </div>
   {/if} -->
-  {#each Object.entries(thot.props) as p, i}
-    {#switch p[0]}
-      {:case "heading"}
-        <div id='heading'>
-          <button id="focus">F</button>
-          <Entry key={"heading"}>
-            <MultilineTextarea_>
-              <textarea 
-              use:InputInit={{key: p[0]}}
-              placeholder={p[0]} 
-              value={p[1]} 
-              on:focus={(e) => {onTextareaFocus(e)}} 
-              on:keydown={(e) => {onHeadingKeydown(e, p[0])}}></textarea>
-              <textarea></textarea>
-            </MultilineTextarea_>
-          </Entry>
-        </div>
-      {:case "content"}
-        <Entry key={"content"}>
-          <MultilineTextarea_>
-            <textarea 
-            use:InputInit={{key: p[0]}}
-            placeholder={p[0]} 
-            value={p[1]} 
-            on:focus={(e) => {onTextareaFocus(e)}} 
-            on:input={(e) => {onTextareaInput(e, p[0])}}></textarea>
-            <textarea></textarea>
-          </MultilineTextarea_>
-        </Entry>
-      {:default}
-      <div class="entry">
-        {#switch p[1].type}
-          {:case "int"}
-            <Entry key={p[0]} on:delProp={delProp}>
-              <input type="number" placeholder={p[0]} min="1" max="100">
+  {#if Object.keys(thot.props).length===1 && Object.keys(thot.props)[0]==='content'}
+    <div id='heading'>
+      <button id="focus">F</button>
+      <Entry key={"content"}>
+        <MultilineTextarea_>
+          <textarea 
+          use:InputInit={{key: 'content'}}
+          placeholder={'content'} 
+          value={""} 
+          on:focus={(e) => {onTextareaFocus(e)}} 
+          on:keydown={(e) => {onHeadingKeydown(e, 'content')}}></textarea>
+          <textarea></textarea>
+        </MultilineTextarea_>
+      </Entry>
+    </div>
+    {:else}
+      {#each Object.entries(thot.props) as p, i}
+        {#switch p[0]}
+          {:case "heading"}
+            <div id='heading'>
+              <button id="focus">F</button>
+              <Entry key={"heading"}>
+                <MultilineTextarea_>
+                  <textarea 
+                  use:InputInit={{key: p[0]}}
+                  placeholder={p[0]} 
+                  value={p[1]} 
+                  on:focus={(e) => {onTextareaFocus(e)}} 
+                  on:input={(e) => {onTextareaInput(e, p[0])}}></textarea>
+                  <textarea></textarea>
+                </MultilineTextarea_>
+              </Entry>
+            </div>
+          {:case "content"}
+            <Entry key={"content"}>
+              <MultilineTextarea_>
+                <textarea 
+                use:InputInit={{key: p[0]}}
+                placeholder={p[0]} 
+                value={p[1]} 
+                on:focus={(e) => {onTextareaFocus(e)}} 
+                on:input={(e) => {onTextareaInput(e, p[0])}}></textarea>
+                <textarea></textarea>
+              </MultilineTextarea_>
             </Entry>
           {:default}
-            <Entry key={p[0]} on:delProp={delProp}>
-              <MultilineTextarea key={p[0]} placeholder={p[0]} value={""} textAlign={p[1].textAlign} on:focus={onTextareaFocus} on:input={onTextareaInput}/>
-            </Entry>
+          <div class="entry">
+            {#switch p[1].type}
+              {:case "int"}
+                <Entry key={p[0]} on:delProp={delProp}>
+                  <input type="number" placeholder={p[0]} min="1" max="100">
+                </Entry>
+              {:default}
+                <Entry key={p[0]} on:delProp={delProp}>
+                  <MultilineTextarea key={p[0]} placeholder={p[0]} value={""} textAlign={p[1].textAlign} on:focus={onTextareaFocus} on:input={onTextareaInput}/>
+                </Entry>
+            {/switch}
+          </div>
         {/switch}
-      </div>
-    {/switch}
+      {/each}
+  {/if}
+  
     
     <!-- {#if p[0] === "heading"}
     {:else}
@@ -205,7 +227,6 @@
         {/if}
       </div>
     {/if} -->
-  {/each}
 </div>
 
 <style lang="stylus">
