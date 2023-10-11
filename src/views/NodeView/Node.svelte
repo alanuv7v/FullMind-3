@@ -232,7 +232,7 @@
 </div>
 
 <style lang="stylus">
-  @import "../../themes/Space/global_variables"
+  //@import "../../themes/Space/global_variables"
   #main {
     width: 40em;
     height: fit-content

@@ -5,6 +5,9 @@
   import NodeView from "./views/NodeView/NodeView.svelte"
   import MultilineTextarea from './lib/MultilineTextarea.svelte'
   import FixedContextMenu from "./FixedContextMenu.svelte"
+  import Experiment from "./views/Experiment.svelte"
+
+
   import {onMount} from 'svelte'
   import {writable} from 'svelte/store'
 
@@ -95,6 +98,8 @@ let container = {
   let hi3 = document.documentElement.clientHeight
   let hi4 = window.visualViewport.height
 
+  let experiment = false
+
 
 
 </script>
@@ -114,14 +119,19 @@ let container = {
     color={glob.light}
     />
   </div>
+  <label>experiment?<input type="checkbox" bind:checked={experiment}></label>
   <div id="content">
-    {#await $loadedHead}
-      <div>...Loading</div>
-    {:then loadedHead} 
-      <NodeView {loadedHead} />
-    {:catch error}
-      <p>오류가 발생했습니다.</p>
-    {/await}
+    {#if experiment}
+      <Experiment />
+    {:else}
+      {#await $loadedHead}
+        <div>...Loading</div>
+      {:then loadedHead} 
+        <NodeView {loadedHead} />
+      {:catch error}
+        <p>오류가 발생했습니다.</p>
+      {/await}
+    {/if}
   </div>
   <div id="keyboard_toolbar" bind:this={keyboard_toolbar}>
     <button>⮝</button>

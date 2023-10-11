@@ -2,7 +2,7 @@
 
 <script>
   //import from svelte
-  import {onMount, afterUpdate, getContext} from "svelte"
+   import {onMount, afterUpdate, getContext} from "svelte"
   //import modules
   import stringify from "json-stringify-pretty-compact";
   //import child components
@@ -10,18 +10,17 @@
   import Entry from "./Entry.svelte";
   import {menuItems, menuItem} from "../fixedContextMenu_store"
 
-  //bind child components
-  let main
   //props to inherit
-  export let obj
+    export let obj
+
+  //bind child components
+    let main
 
   //States of this component
-  let menu
-  let screen = "default" //possible screen states: ["default", "fullscreen", "zen"]
-  let Entries_Inputs = []
+    let menu
+    let screen = "default" //possible screen states: ["default", "fullscreen", "zen"]
+    let Entries_Inputs = []
   
-  //Event handlers
-
   //settings
     let initGrow = true
     let typewritter = false
@@ -103,7 +102,7 @@
       Entries_Inputs[focusedInput].focus()
     }
 
-  //Event Listeners
+  //Event Handlers
 
     function onTextareaInput(e, key) {
       //어쩌면 focus out 시에 저장하는게 나을수도.
@@ -148,12 +147,47 @@
 
 </script>
 
+
+
 <div id="main" bind:this={main} class="border">
   <!-- {#if !Object.keys(thot.props).includes("heading")}
   <div id='heading'>
     <button id="focus">F</button>
   </div>
   {/if} -->
+
+  {#each Object.entries(obj) as obj, i}
+  <!-- {#switch p[0]}
+    {:case "heading"}
+    {:case "content"}
+    {:default}
+  {/switch} -->
+  {#switch obj[1].type}
+    {:case "object"}
+      <svelte:self {obj}/>
+    {:case "string"}
+      <MultilineTextarea_> <!-- create textarea for synchronous I/O ! -->
+        <textarea 
+        use:InputInit={{key: entry[0]}}
+        placeholder={entry[0]} 
+        value={entry[1]} 
+        on:focus={(e) => {onTextareaFocus(e)}} 
+        on:input={(e) => {onTextareaInput(e, entry[0])}}></textarea>
+        <textarea value={entry[1]}></textarea>
+      </MultilineTextarea_>
+    {:case "Number"}
+    {:case "Bool"}
+    {:default} <!-- textarea -->
+  {/switch}
+  {/each}
+
+
+
+
+
+
+
+
   {#if Object.keys(thot.props).length===1 && Object.keys(thot.props)[0]==='content'}
     <div id='heading'>
       <button id="focus">F</button>
