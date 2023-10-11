@@ -3,8 +3,10 @@
 <script>
   //import from svelte
   import {getContext, setContext, createEventDispatcher, onMount} from 'svelte'
+  import {default_thot} from '../default'
   const dispatch = createEventDispatcher()
   //import modules
+  import stringify from "json-stringify-pretty-compact";
   //import child components
   import Obj_IO from '../IO/Obj_IO.svelte'
 
@@ -16,14 +18,13 @@
   
   //Event handlers
 
+  let obj = default_thot
 </script>
 
-<template lang="pug">
-
-</template>
-
-<!-- <main>
-</main> -->
+<main>
+  {stringify(obj)}
+  <Obj_IO {obj}/>
+</main>
 
 
 <style lang="stylus">
