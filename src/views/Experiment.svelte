@@ -19,16 +19,20 @@
   //Event handlers
 
   let obj = default_thot
+  let data = {
+    key: "default_thot",
+    values: Object.entries(obj)
+  }
 </script>
 
 <main>
   {stringify(obj)}
-  <Obj_IO {obj}/>
+  <Obj_IO {data}/>
 </main>
 
 
 <style lang="stylus">
-  //@import "/themes/Space/___"
+  
 </style>
 
 

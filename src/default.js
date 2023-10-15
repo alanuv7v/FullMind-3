@@ -7,7 +7,7 @@ export const default_thot = {
    /*age: {type: "Int"}, */
   },
   relations: [
-    {parents: [],
+    {parents: {ids: [], type: "id"},
       children: []},
     {conclusions: [],
       reasons: []},
