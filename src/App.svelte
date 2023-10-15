@@ -49,6 +49,8 @@ let head = async function () {return await import('/home/alanuv7v/FullMind-3/src
 
 let loadedHead = writable(head) 
 
+
+
 //No need for save function, since textarea value is binded to loadedHead.thots[n].props['something']. 
 //The user only needs to download the head, and then load it when the app is refreshed
 
