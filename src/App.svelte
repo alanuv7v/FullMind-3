@@ -38,16 +38,16 @@ function download(content, fileName, contentType) {
   a.click();
 }
 
-let head =
-importModule(settings.lastState) //state.js
+let head = async function () {return await import('/home/alanuv7v/FullMind-3/src/data/heads/head_1.json')}
+/* importModule(settings.lastState) //state.js
 .then(obj => {
   return obj.state
 })
 .then(state => {
   return importModule(state.loadedHeadPath) //head_1.json
-});
+});*/
 
-let loadedHead = writable(head)
+let loadedHead = writable(head) 
 
 //No need for save function, since textarea value is binded to loadedHead.thots[n].props['something']. 
 //The user only needs to download the head, and then load it when the app is refreshed
