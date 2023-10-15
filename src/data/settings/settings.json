@@ -1,4 +1,4 @@
 {
-  "statesFolder": "/home/alanuv7v/FullMind-3/src/data/states",
-  "lastState": "/home/alanuv7v/FullMind-3/src/data/states/state_01.js"
+  "statesFolder": "../states",
+  "lastState": "../states/state_01.js"
 }
